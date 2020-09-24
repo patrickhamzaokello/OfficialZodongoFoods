@@ -390,7 +390,7 @@ class _PrimaryButtonState extends State<PrimaryButton> {
     return Container(
       decoration: BoxDecoration(
           color: Color(0xFFB40284A), borderRadius: BorderRadius.circular(50)),
-      padding: EdgeInsets.all(20),
+      padding: EdgeInsets.all(10),
       child: Center(
         child: Text(
           widget.btnText,
@@ -416,7 +416,7 @@ class _OutlineBtnState extends State<OutlineBtn> {
       decoration: BoxDecoration(
           border: Border.all(color: Color(0xFFB40284A), width: 2),
           borderRadius: BorderRadius.circular(50)),
-      padding: EdgeInsets.all(20),
+      padding: EdgeInsets.all(10),
       child: Center(
         child: Text(
           widget.btnText,
