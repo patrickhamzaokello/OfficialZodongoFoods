@@ -24,7 +24,7 @@ class _DetailsPageState extends State<DetailsPage> {
                 height: 200.0,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage('assets/green.jpg'),
+                        image: AssetImage('assets/images/green.jpg'),
                         fit: BoxFit.cover),
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(100.0),

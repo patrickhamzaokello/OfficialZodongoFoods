@@ -11,6 +11,10 @@ class Browse extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          title: Text("Zodongo Foods"),
+          backgroundColor: Color(0xFF5AC035),
+        ),
         body: Container(
           child: MyHomePage(),
         ),
@@ -31,41 +35,41 @@ class _MyHomePageState extends State<MyHomePage> {
       body: ListView(
         children: <Widget>[
           SizedBox(height: 20.0),
-          Padding(
-            padding: EdgeInsets.only(left: 15.0, right: 15.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.menu),
-                  color: Colors.black,
-                ),
-                Container(
-                  height: 40.0,
-                  width: 40.0,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(7.0),
-                      image: DecorationImage(
-                          image: AssetImage('assets/images/avocado.png'),
-                          fit: BoxFit.cover)),
-                )
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: EdgeInsets.only(left: 15.0, right: 15.0),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: <Widget>[
+          //       IconButton(
+          //         onPressed: () {},
+          //         icon: Icon(Icons.menu),
+          //         color: Colors.black,
+          //       ),
+          //       Container(
+          //         height: 40.0,
+          //         width: 40.0,
+          //         decoration: BoxDecoration(
+          //             borderRadius: BorderRadius.circular(7.0),
+          //             image: DecorationImage(
+          //                 image: AssetImage('assets/images/avocado.png'),
+          //                 fit: BoxFit.cover)),
+          //       )
+          //     ],
+          //   ),
+          // ),
           SizedBox(height: 10.0),
           Padding(
             padding: EdgeInsets.only(left: 25.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text('Zodongo',
+                Text('Always',
                     style: TextStyle(
                         fontFamily: 'Futur',
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF5B8842),
                         fontSize: 50.0)),
-                Text('Foods',
+                Text('Zodongo',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF5B8842),
@@ -85,10 +89,11 @@ class _MyHomePageState extends State<MyHomePage> {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: <Widget>[
+                _buildListItem('assets/burger.png', 'Beef Burger', '\$26'),
+                _buildListItem('assets/plate6.png', 'BBQ  Plate', '\$26'),
+                _buildListItem('assets/plate3.png', 'Vegan Breakfast', '\$28'),
                 _buildListItem(
-                    'assets/images/plate1.png', 'Vegan Breakfast', '\$28'),
-                _buildListItem(
-                    'assets/images/plate2.png', 'Protein Salad', '\$26')
+                    'assets/images/plate2.png', 'Protein Salad', '\$26'),
               ],
             ),
           ),
