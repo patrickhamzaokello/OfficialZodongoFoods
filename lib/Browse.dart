@@ -106,21 +106,20 @@ class _MyHomePageState extends State<MyHomePage> {
                       fontWeight: FontWeight.w600,
                       fontSize: 17.0))),
           SizedBox(height: 20.0),
-          Padding(
-            padding: EdgeInsets.only(left: 20.0, right: 20.0),
-            child: Container(
-              height: 200.0,
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [Colors.white, Color(0xFFACBEA3)],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight),
-                  borderRadius: BorderRadius.circular(15.0),
-                  image: DecorationImage(
-                      image: AssetImage('assets/images/plate1.png'),
-                      fit: BoxFit.contain)),
-            ),
-          )
+          ListView(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                _buildFoodItem('assets/plate1.png', 'Salmon', '\UGX 5000'),
+                _buildFoodItem('assets/plate2.png', 'Spring bowl', '\UGX 4000'),
+                _buildFoodItem(
+                    'assets/images/plate6.png', 'BBQ Combo', '\UGX 6000'),
+                _buildFoodItem('assets/beans.png', 'Beans Bowl', '\UGX 4500'),
+                _buildFoodItem('assets/images/plate3.png', 'Boo', '\UGX 4000'),
+                _buildFoodItem('assets/chicken.png', 'Muchomo', '\UGX 7000'),
+                _buildFoodItem('assets/macd.png', 'WI-D bowl', '\UGX 5500'),
+                _buildFoodItem('assets/plate5.png', 'Berry bowl', '\UGX 4000')
+              ]),
         ],
       ),
       bottomNavigationBar: Container(
@@ -161,6 +160,51 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+
+  Widget _buildFoodItem(String imgPath, String foodName, String price) {
+    return Padding(
+        padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
+        child: InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => DetailsPage(
+                      heroTag: imgPath, foodName: foodName, foodPrice: price)));
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Container(
+                    child: Row(children: [
+                  Hero(
+                      tag: imgPath,
+                      child: Image(
+                          image: AssetImage(imgPath),
+                          fit: BoxFit.cover,
+                          height: 75.0,
+                          width: 75.0)),
+                  SizedBox(width: 10.0),
+                  Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(foodName,
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontSize: 17.0,
+                                fontWeight: FontWeight.bold)),
+                        Text(price,
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontSize: 15.0,
+                                color: Colors.grey))
+                      ])
+                ])),
+                IconButton(
+                    icon: Icon(Icons.add),
+                    color: Colors.black,
+                    onPressed: () {})
+              ],
+            )));
   }
 
   Widget _buildListItem(String imgPath, String foodName, String price) {
