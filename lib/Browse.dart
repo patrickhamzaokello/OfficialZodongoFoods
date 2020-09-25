@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'detailPage.dart';
 import 'checkout.dart';
+import 'shopping.dart';
 
 class Browse extends StatelessWidget {
   @override
@@ -163,29 +164,64 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Icon(
-              Icons.bookmark_border,
-              color: Colors.white,
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  (MaterialPageRoute(builder: (context) => ShoppingCart())),
+                );
+              },
+              icon: Icon(
+                Icons.bookmark_border,
+                color: Colors.white,
+              ),
             ),
             Icon(
               Icons.search,
               color: Colors.white,
             ),
-            IconButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  (MaterialPageRoute(builder: (context) => CheckoutPage())),
-                );
-              },
-              icon: Icon(
-                Icons.shopping_cart,
-                color: Colors.white,
-              ),
-            ),
             Icon(
               Icons.person_outline,
               color: Colors.white,
-            )
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 2.0),
+              child: GestureDetector(
+                child: Stack(
+                  alignment: Alignment.topCenter,
+                  children: <Widget>[
+                    Icon(
+                      Icons.shopping_cart,
+                      color: Colors.white,
+                      size: 25.0,
+                    ),
+                    if (savedWords.length > 0)
+                      Padding(
+                        padding: const EdgeInsets.only(left: 2.0),
+                        child: CircleAvatar(
+                          radius: 8.0,
+                          backgroundColor: Colors.red,
+                          foregroundColor: Colors.white,
+                          child: Text(
+                            savedWords.length.toString(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+                onTap: () {
+                  if (savedWords.isNotEmpty)
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => CheckoutPage(),
+                      ),
+                    );
+                },
+              ),
+            ),
           ],
         ),
       ),
