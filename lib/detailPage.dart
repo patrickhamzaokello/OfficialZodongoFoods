@@ -4,8 +4,10 @@ class DetailsPage extends StatefulWidget {
   final heroTag;
   final foodName;
   final foodPrice;
+  final foodDescription;
 
-  DetailsPage({this.heroTag, this.foodName, this.foodPrice});
+  DetailsPage(
+      {this.heroTag, this.foodName, this.foodPrice, this.foodDescription});
 
   @override
   _DetailsPageState createState() => _DetailsPageState();
@@ -144,7 +146,7 @@ class _DetailsPageState extends State<DetailsPage> {
                 SizedBox(height: 15.0),
                 Container(
                   child: Text(
-                    'This light home-cooked food is low salt and low oil with balanced nutrition, selected from high-quality ingredients. This delicious food maybe your best healthy choice.',
+                    widget.foodDescription,
                     style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 14.0,

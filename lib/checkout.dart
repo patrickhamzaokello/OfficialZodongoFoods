@@ -10,7 +10,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF21BFBD),
+      backgroundColor: Color(0xFF5AC035),
       body: ListView(
         children: <Widget>[
           Padding(

@@ -89,11 +89,17 @@ class _MyHomePageState extends State<MyHomePage> {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: <Widget>[
-                _buildListItem('assets/burger.png', 'Beef Burger', '\$26'),
-                _buildListItem('assets/plate6.png', 'BBQ  Plate', '\$26'),
-                _buildListItem('assets/plate3.png', 'Vegan Breakfast', '\$28'),
+                _buildListItem('assets/burger.png', 'Beef Burger', '\$26',
+                    'This Burger home-cooked food is low salt and low oil with balanced nutrition, selected from high-quality ingredients. This delicious food maybe your best healthy choice.'),
+                _buildListItem('assets/plate6.png', 'BBQ  Plate', '\$26',
+                    'This light home-cooked food is low salt and low oil with balanced nutrition, selected from high-quality ingredients. This delicious food maybe your best healthy choice.'),
+                _buildListItem('assets/plate3.png', 'Vegan Breakfast', '\$28',
+                    'This light home-cooked food is low salt and low oil with balanced nutrition, selected from high-quality ingredients. This delicious food maybe your best healthy choice.'),
                 _buildListItem(
-                    'assets/images/plate2.png', 'Protein Salad', '\$26'),
+                    'assets/images/plate2.png',
+                    'Protein Salad',
+                    '\$26',
+                    'This light home-cooked food is low salt and low oil with balanced nutrition, selected from high-quality ingredients. This delicious food maybe your best healthy choice.'),
               ],
             ),
           ),
@@ -109,24 +115,35 @@ class _MyHomePageState extends State<MyHomePage> {
           ListView(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
+              padding: EdgeInsets.only(bottom: 40.0),
               children: [
-                _buildFoodItem('assets/plate1.png', 'Salmon', '\UGX 5000'),
-                _buildFoodItem('assets/plate2.png', 'Spring bowl', '\UGX 4000'),
+                _buildFoodItem('assets/plate1.png', 'Salmon', '\UGX 5000',
+                    'The Best Beef Burger in the Land'),
+                _buildFoodItem('assets/plate2.png', 'Spring bowl', '\UGX 4000',
+                    'Spring Bowl made from local available content'),
                 _buildFoodItem(
-                    'assets/images/plate6.png', 'BBQ Combo', '\UGX 6000'),
-                _buildFoodItem('assets/beans.png', 'Beans Bowl', '\UGX 4500'),
-                _buildFoodItem('assets/images/plate3.png', 'Boo', '\UGX 4000'),
-                _buildFoodItem('assets/chicken.png', 'Muchomo', '\UGX 7000'),
-                _buildFoodItem('assets/macd.png', 'WI-D bowl', '\UGX 5500'),
-                _buildFoodItem('assets/plate5.png', 'Berry bowl', '\UGX 4000')
+                    'assets/images/plate6.png',
+                    'BBQ Combo',
+                    '\UGX 6000',
+                    'You need to try out our BBQ specially made for your tasty buds'),
+                _buildFoodItem('assets/beans.png', 'Beans Bowl', '\UGX 4500',
+                    'There is nothing like our own Beans plate that is served with much favour and juice'),
+                _buildFoodItem('assets/images/plate3.png', 'Boo', '\UGX 4000',
+                    'Lets talk about quality for all the party people'),
+                _buildFoodItem('assets/chicken.png', 'Muchomo', '\UGX 7000',
+                    'Muchome is the word, get your own from zodongo food'),
+                _buildFoodItem('assets/macd.png', 'WI-D bowl', '\UGX 5500',
+                    'Mach and Cheese, we make it all. Try it out with us'),
+                _buildFoodItem('assets/plate5.png', 'Berry bowl', '\UGX 4000',
+                    'For all the Vegan Friends out there. we gat what you need ')
               ]),
         ],
       ),
       bottomNavigationBar: Container(
         height: 75.0,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(50.0), topRight: Radius.circular(50.0)),
+          // borderRadius: BorderRadius.only(
+          // topLeft: Radius.circular(50.0), topRight: Radius.circular(50.0)),
           color: Color(0xFF5AC035),
         ),
         padding: EdgeInsets.only(left: 40.0, right: 40.0),
@@ -162,14 +179,19 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget _buildFoodItem(String imgPath, String foodName, String price) {
+  Widget _buildFoodItem(
+      String imgPath, String foodName, String price, String description) {
     return Padding(
         padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
         child: InkWell(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => DetailsPage(
-                      heroTag: imgPath, foodName: foodName, foodPrice: price)));
+                        heroTag: imgPath,
+                        foodName: foodName,
+                        foodPrice: price,
+                        foodDescription: description,
+                      )));
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -207,12 +229,17 @@ class _MyHomePageState extends State<MyHomePage> {
             )));
   }
 
-  Widget _buildListItem(String imgPath, String foodName, String price) {
+  Widget _buildListItem(
+      String imgPath, String foodName, String price, String description) {
     return InkWell(
         onTap: () {
           Navigator.of(context).push((MaterialPageRoute(
               builder: (context) => DetailsPage(
-                  heroTag: imgPath, foodName: foodName, foodPrice: price))));
+                    heroTag: imgPath,
+                    foodName: foodName,
+                    foodPrice: price,
+                    foodDescription: description,
+                  ))));
         },
         child: Padding(
             padding: EdgeInsets.only(left: 20.0, top: 10.0, bottom: 4.0),
