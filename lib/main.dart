@@ -188,7 +188,7 @@ class _LoginPageState extends State<LoginPage> {
                       padding: EdgeInsets.all(20),
                       width: double.infinity,
                       decoration: BoxDecoration(
-                          color: Color(0xFFB40284A),
+                          color: Color(0xFF5AC035),
                           borderRadius: BorderRadius.circular(50)),
                       child: Center(
                         child: Text(

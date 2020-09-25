@@ -128,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ListView(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.only(bottom: 40.0),
+              padding: EdgeInsets.only(left: 20.0),
               children: [
                 _buildFoodItem('assets/plate1.png', 'Salmon', '\UGX 5000',
                     'The Best Beef Burger in the Land'),
@@ -370,7 +370,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                             fontFamily: 'Montserrat',
                                             fontWeight: FontWeight.w500,
                                             color: Colors.black,
-                                            fontSize: 16.0)),
+                                            fontSize: 13.0)),
                                   ],
                                 ))
                           ],
