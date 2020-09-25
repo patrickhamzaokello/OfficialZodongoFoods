@@ -192,54 +192,70 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  Set<String> savedWords = Set<String>();
+
   Widget _buildFoodItem(
       String imgPath, String foodName, String price, String description) {
+    bool isSaved = savedWords.contains(foodName);
+
     return Padding(
-        padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
-        child: InkWell(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => DetailsPage(
-                        heroTag: imgPath,
-                        foodName: foodName,
-                        foodPrice: price,
-                        foodDescription: description,
-                      )));
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Container(
-                    child: Row(children: [
-                  Hero(
-                      tag: imgPath,
-                      child: Image(
-                          image: AssetImage(imgPath),
-                          fit: BoxFit.cover,
-                          height: 75.0,
-                          width: 75.0)),
-                  SizedBox(width: 10.0),
-                  Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(foodName,
-                            style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontSize: 17.0,
-                                fontWeight: FontWeight.bold)),
-                        Text(price,
-                            style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontSize: 15.0,
-                                color: Colors.grey))
-                      ])
-                ])),
-                IconButton(
-                    icon: Icon(Icons.add),
-                    color: Colors.black,
-                    onPressed: () {})
-              ],
-            )));
+      padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
+      child: InkWell(
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => DetailsPage(
+                    heroTag: imgPath,
+                    foodName: foodName,
+                    foodPrice: price,
+                    foodDescription: description,
+                  )));
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Container(
+                child: Row(children: [
+              Hero(
+                  tag: imgPath,
+                  child: Image(
+                      image: AssetImage(imgPath),
+                      fit: BoxFit.cover,
+                      height: 75.0,
+                      width: 75.0)),
+              SizedBox(width: 10.0),
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text(foodName,
+                    style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 17.0,
+                        fontWeight: FontWeight.bold)),
+                Text(price,
+                    style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 15.0,
+                        color: Colors.grey))
+              ])
+            ])),
+            GestureDetector(
+              onTap: () {
+                print(savedWords);
+                setState(() {
+                  if (isSaved) {
+                    savedWords.remove(foodName);
+                  } else {
+                    savedWords.add(foodName);
+                  }
+                });
+              },
+              child: Icon(
+                isSaved ? Icons.favorite : Icons.add,
+                color: isSaved ? Colors.red : null,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _buildListItem(
