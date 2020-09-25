@@ -156,7 +156,7 @@ class _LoginPageState extends State<LoginPage> {
                           margin: EdgeInsets.all(20),
                           padding: EdgeInsets.symmetric(horizontal: 32),
                           child: Text(
-                            "We make learning easy. Join Tvac Studio to learn flutter for free on YouTube.",
+                            "We offer the best Meals in and around town. Get Started by signing up and Enjoy our wide range of Food Options",
                             textAlign: TextAlign.center,
                             style:
                                 TextStyle(color: _headingColor, fontSize: 16),
@@ -169,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 32),
                   child: Center(
-                    child: Image.asset("assets/images/splash_bg.png"),
+                    child: Image.asset("assets/images/mexicanplate.png"),
                   ),
                 ),
                 Container(

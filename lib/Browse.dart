@@ -63,17 +63,17 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text('Always',
+                Text('You Stay At Home.',
                     style: TextStyle(
                         fontFamily: 'Futur',
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF5B8842),
-                        fontSize: 50.0)),
-                Text('Zodongo',
+                        fontSize: 35.0)),
+                Text('We Deliver!',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF5B8842),
-                        fontSize: 50.0)),
+                        fontSize: 35.0)),
                 SizedBox(height: 20.0),
                 Text('Popular Food',
                     style: TextStyle(
@@ -89,17 +89,30 @@ class _MyHomePageState extends State<MyHomePage> {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: <Widget>[
-                _buildListItem('assets/burger.png', 'Beef Burger', '\$26',
-                    'This Burger home-cooked food is low salt and low oil with balanced nutrition, selected from high-quality ingredients. This delicious food maybe your best healthy choice.'),
-                _buildListItem('assets/plate6.png', 'BBQ  Plate', '\$26',
-                    'This light home-cooked food is low salt and low oil with balanced nutrition, selected from high-quality ingredients. This delicious food maybe your best healthy choice.'),
-                _buildListItem('assets/plate3.png', 'Vegan Breakfast', '\$28',
-                    'This light home-cooked food is low salt and low oil with balanced nutrition, selected from high-quality ingredients. This delicious food maybe your best healthy choice.'),
                 _buildListItem(
-                    'assets/images/plate2.png',
-                    'Protein Salad',
-                    '\$26',
-                    'This light home-cooked food is low salt and low oil with balanced nutrition, selected from high-quality ingredients. This delicious food maybe your best healthy choice.'),
+                  'assets/burger.png',
+                  'Beef Burger',
+                  '\Ugx 7000',
+                  'This Burger home-cooked food is low salt and low oil with balanced nutrition, selected from high-quality ingredients. This delicious food maybe your best healthy choice.',
+                ),
+                _buildListItem(
+                  'assets/plate6.png',
+                  'BBQ  Plate',
+                  '\Ugx 5500',
+                  'This light home-cooked food is low salt and low oil with balanced nutrition, selected from high-quality ingredients. This delicious food maybe your best healthy choice.',
+                ),
+                _buildListItem(
+                  'assets/plate3.png',
+                  'Vegan Breakfast',
+                  '\Ugx 8000',
+                  'This light home-cooked food is low salt and low oil with balanced nutrition, selected from high-quality ingredients. This delicious food maybe your best healthy choice.',
+                ),
+                _buildListItem(
+                  'assets/images/plate2.png',
+                  'Protein Salad',
+                  '\Ugx 7500',
+                  'This light home-cooked food is low salt and low oil with balanced nutrition, selected from high-quality ingredients. This delicious food maybe your best healthy choice.',
+                ),
               ],
             ),
           ),

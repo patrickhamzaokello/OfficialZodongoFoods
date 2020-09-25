@@ -50,18 +50,43 @@ class _CheckoutPageState extends State<CheckoutPage> {
             padding: EdgeInsets.only(left: 40.0),
             child: Row(
               children: <Widget>[
-                Text('Selected',
+                Text('Your',
                     style: TextStyle(
                         fontFamily: 'Montserrat',
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 25.0)),
                 SizedBox(width: 10.0),
-                Text('Foods',
+                Text('Order Cart',
                     style: TextStyle(
                         fontFamily: 'Montserrat',
                         color: Colors.white,
                         fontSize: 25.0))
+              ],
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(top: 10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Total',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 17.0,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(width: 10.0),
+                Text(
+                  'Ugx 78,000',
+                  style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 18.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                )
               ],
             ),
           ),
@@ -77,7 +102,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
               padding: EdgeInsets.only(left: 25.0, right: 20.0),
               children: <Widget>[
                 Padding(
-                    padding: EdgeInsets.only(top: 45.0),
+                    padding: EdgeInsets.only(top: 35.0),
                     child: Container(
                         height: MediaQuery.of(context).size.height - 350.0,
                         child: ListView(children: [
@@ -113,7 +138,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           borderRadius: BorderRadius.circular(10.0),
                           color: Color(0xFF1C1428)),
                       child: Center(
-                          child: Text('Checkout',
+                          child: Text('Complete Order',
                               style: TextStyle(
                                   fontFamily: 'Montserrat',
                                   color: Colors.white,

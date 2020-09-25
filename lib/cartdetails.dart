@@ -17,7 +17,7 @@ class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xFF7A9BEE),
+        backgroundColor: Color(0xFF5AC035),
         appBar: AppBar(
           leading: IconButton(
             onPressed: () {
@@ -98,7 +98,7 @@ class _DetailsPageState extends State<DetailsPage> {
                           height: 40.0,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(17.0),
-                              color: Color(0xFF7A9BEE)),
+                              color: Color(0xFF5AC035)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
@@ -109,7 +109,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                   width: 25.0,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(7.0),
-                                      color: Color(0xFF7A9BEE)),
+                                      color: Color(0xFF5AC035)),
                                   child: Center(
                                     child: Icon(
                                       Icons.remove,
@@ -119,7 +119,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                   ),
                                 ),
                               ),
-                              Text('2',
+                              Text('1',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: 'Montserrat',
@@ -135,7 +135,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                   child: Center(
                                     child: Icon(
                                       Icons.add,
-                                      color: Color(0xFF7A9BEE),
+                                      color: Color(0xFF5AC035),
                                       size: 20.0,
                                     ),
                                   ),
@@ -174,7 +174,7 @@ class _DetailsPageState extends State<DetailsPage> {
                             color: Colors.black),
                         height: 50.0,
                         child: Center(
-                          child: Text('\ UGX 5500',
+                          child: Text(widget.foodPrice,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontFamily: 'Montserrat')),
@@ -198,7 +198,7 @@ class _DetailsPageState extends State<DetailsPage> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
               color:
-                  cardTitle == selectedCard ? Color(0xFF7A9BEE) : Colors.white,
+                  cardTitle == selectedCard ? Color(0xFF5AC035) : Colors.white,
               border: Border.all(
                   color: cardTitle == selectedCard
                       ? Colors.transparent

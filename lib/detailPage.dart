@@ -174,7 +174,7 @@ class _DetailsPageState extends State<DetailsPage> {
                         ),
                         SizedBox(width: 10.0),
                         Text(
-                          '\$84.00',
+                          widget.foodPrice,
                           style: TextStyle(
                               fontFamily: 'Montserrat',
                               fontSize: 18.0,
