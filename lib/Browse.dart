@@ -238,7 +238,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ])),
             GestureDetector(
               onTap: () {
-                print(savedWords);
                 setState(() {
                   if (isSaved) {
                     savedWords.remove(foodName);
@@ -246,6 +245,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     savedWords.add(foodName);
                   }
                 });
+                print(savedWords);
               },
               child: Icon(
                 isSaved ? Icons.favorite : Icons.add,

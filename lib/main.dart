@@ -90,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
         _registerYOffset = windowHeight;
         break;
       case 1:
-        _backgroundColor = Color(0xFFBD34C59);
+        _backgroundColor = Color(0xFF5AC035);
         _headingColor = Colors.white;
 
         _headingTop = 90;
@@ -105,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
         _registerYOffset = windowHeight;
         break;
       case 2:
-        _backgroundColor = Color(0xFFBD34C59);
+        _backgroundColor = Color(0xFF5AC035);
         _headingColor = Colors.white;
 
         _headingTop = 80;
@@ -365,7 +365,7 @@ class _InputWithIconState extends State<InputWithIcon> {
           Expanded(
             child: TextField(
               decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(vertical: 20),
+                  contentPadding: EdgeInsets.symmetric(vertical: 10),
                   border: InputBorder.none,
                   hintText: widget.hint),
             ),
@@ -389,7 +389,9 @@ class _PrimaryButtonState extends State<PrimaryButton> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Color(0xFFB40284A), borderRadius: BorderRadius.circular(50)),
+        color: Color(0xFF5AC035),
+        borderRadius: BorderRadius.circular(50),
+      ),
       padding: EdgeInsets.all(10),
       child: Center(
         child: Text(
@@ -414,7 +416,7 @@ class _OutlineBtnState extends State<OutlineBtn> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          border: Border.all(color: Color(0xFFB40284A), width: 2),
+          border: Border.all(color: Color(0xFF5AC035), width: 2),
           borderRadius: BorderRadius.circular(50)),
       padding: EdgeInsets.all(10),
       child: Center(
