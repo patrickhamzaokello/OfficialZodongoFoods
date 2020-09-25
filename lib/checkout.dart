@@ -102,9 +102,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
               padding: EdgeInsets.only(left: 25.0, right: 20.0),
               children: <Widget>[
                 Padding(
-                    padding: EdgeInsets.only(top: 35.0),
+                    padding: EdgeInsets.only(top: 10.0),
                     child: Container(
-                        height: MediaQuery.of(context).size.height - 350.0,
+                        height: MediaQuery.of(context).size.height - 300.0,
                         child: ListView(children: [
                           _buildFoodItem(
                               'assets/plate1.png', 'Salmon', '\UGX 5000'),
@@ -123,28 +123,36 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           _buildFoodItem(
                               'assets/plate5.png', 'Berry bowl', '\UGX 4000')
                         ]))),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.all(32),
-                      padding: EdgeInsets.all(20),
-                      width: 170,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              color: Colors.grey,
-                              style: BorderStyle.solid,
-                              width: 1.0),
-                          borderRadius: BorderRadius.circular(10.0),
-                          color: Color(0xFF1C1428)),
-                      child: Center(
-                          child: Text('Complete Order',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  color: Colors.white,
-                                  fontSize: 15.0))),
-                    )
-                  ],
+                Container(
+                  height: 50.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30.0),
+                    color: Color(0xFF5AC035),
+                  ),
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Place',
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontSize: 17.0,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(width: 10.0),
+                        Text(
+                          "Order",
+                          style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontSize: 18.0,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                  ),
                 )
               ],
             ),
