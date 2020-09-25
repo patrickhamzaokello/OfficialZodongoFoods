@@ -129,7 +129,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ListView(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.only(left: 20.0),
+              padding: EdgeInsets.only(right: 20.0),
               children: [
                 _buildFoodItem('assets/plate1.png', 'Salmon', '\UGX 5000',
                     'The Best Beef Burger in the Land'),
