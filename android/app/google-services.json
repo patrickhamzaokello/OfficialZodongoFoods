@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "284397086378",
+    "firebase_url": "https://zodongo-foods.firebaseio.com",
+    "project_id": "zodongo-foods",
+    "storage_bucket": "zodongo-foods.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:284397086378:android:1e6606c72b61f85b6952d3",
+        "android_client_info": {
+          "package_name": "com.tvacstudio.flutterloginui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "284397086378-o9vtp43rddgqtprco4fn94ilh32a5doc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tvacstudio.flutterloginui",
+            "certificate_hash": "c50f3b801a2a67db03a52e927b36b1481c1ae44c"
+          }
+        },
+        {
+          "client_id": "284397086378-95vq4d6prr2g28a7b4ituau2odgf9r6a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2PkdxJK0NEcC-0EKObxUuGYxCCEaEMSI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "284397086378-95vq4d6prr2g28a7b4ituau2odgf9r6a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
