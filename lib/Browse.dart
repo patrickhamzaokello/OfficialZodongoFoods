@@ -166,9 +166,9 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             IconButton(
               onPressed: () {
-                Navigator.of(context).push(
-                  (MaterialPageRoute(builder: (context) => ShoppingCart())),
-                );
+                // Navigator.of(context).push(
+                //   (MaterialPageRoute(builder: (context) => ShoppingCart())),
+                // );
               },
               icon: Icon(
                 Icons.bookmark_border,

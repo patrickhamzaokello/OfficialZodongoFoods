@@ -156,6 +156,9 @@ class _DetailsPageState extends State<DetailsPage> {
                 SizedBox(height: 15.0),
                 Container(
                   height: 50.0,
+                  margin: EdgeInsets.only(
+                    bottom: 10.0,
+                  ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30.0),
                     color: Color(0xFF5AC035),
