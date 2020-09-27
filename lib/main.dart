@@ -279,57 +279,59 @@ class _LoginPageState extends State<LoginPage> {
               color: Colors.white,
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(25), topRight: Radius.circular(25))),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Column(
-                children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.only(bottom: 20),
-                    child: Text(
-                      "Create a New Account",
-                      style: TextStyle(fontSize: 20),
+          child: Form(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.only(bottom: 20),
+                      child: Text(
+                        "Create a New Account",
+                        style: TextStyle(fontSize: 20),
+                      ),
                     ),
-                  ),
-                  InputWithIcon(
-                    icon: Icons.email,
-                    hint: "Enter Email...",
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  InputWithIcon(
-                    icon: Icons.vpn_key,
-                    hint: "Enter Password...",
-                  )
-                ],
-              ),
-              Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () {
-                      print("Create Account clicked");
-                    },
-                    child: PrimaryButton(
-                      btnText: "Create Account",
+                    InputWithIcon(
+                      icon: Icons.email,
+                      hint: "Enter Email...",
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _pageState = 1;
-                      });
-                    },
-                    child: OutlineBtn(
-                      btnText: "Back To Login",
+                    SizedBox(
+                      height: 20,
                     ),
-                  )
-                ],
-              ),
-            ],
+                    InputWithIcon(
+                      icon: Icons.vpn_key,
+                      hint: "Enter Password...",
+                    )
+                  ],
+                ),
+                Column(
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () {
+                        print("Create Account clicked");
+                      },
+                      child: PrimaryButton(
+                        btnText: "Create Account",
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _pageState = 1;
+                        });
+                      },
+                      child: OutlineBtn(
+                        btnText: "Back To Login",
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
           ),
         )
       ],
@@ -340,6 +342,7 @@ class _LoginPageState extends State<LoginPage> {
 class InputWithIcon extends StatefulWidget {
   final IconData icon;
   final String hint;
+
   InputWithIcon({this.icon, this.hint});
 
   @override
@@ -347,6 +350,8 @@ class InputWithIcon extends StatefulWidget {
 }
 
 class _InputWithIconState extends State<InputWithIcon> {
+  String email, password;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -363,7 +368,18 @@ class _InputWithIconState extends State<InputWithIcon> {
                 color: Color(0xFFBB9B9B9),
               )),
           Expanded(
-            child: TextField(
+            child: TextFormField(
+              onChanged: (textValue) {
+                setState(() {
+                  email = textValue;
+                });
+              },
+              validator: (emailValue) {
+                if (emailValue.isEmpty) {
+                  return 'This Field is Mandatory';
+                }
+                return null;
+              },
               decoration: InputDecoration(
                   contentPadding: EdgeInsets.symmetric(vertical: 10),
                   border: InputBorder.none,

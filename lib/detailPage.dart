@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class DetailsPage extends StatefulWidget {
   final heroTag;
@@ -14,8 +15,14 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
+  int qtn = 1;
+
   @override
   Widget build(BuildContext context) {
+    // int foodprice = int.parse(widget.foodPrice);
+
+    var nformat = NumberFormat("#,##0", "en_US");
+
     return Scaffold(
       body: ListView(
         children: <Widget>[
@@ -101,7 +108,7 @@ class _DetailsPageState extends State<DetailsPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        widget.foodPrice,
+                        'Ugx ' + nformat.format(int.parse(widget.foodPrice)),
                         style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
@@ -120,10 +127,18 @@ class _DetailsPageState extends State<DetailsPage> {
                               IconButton(
                                 icon: Icon(Icons.remove_circle_outline,
                                     color: Color(0xFF5CB238)),
-                                onPressed: () {},
+                                onPressed: () {
+                                  setState(() {
+                                    if (qtn == 1) {
+                                      qtn = 1;
+                                    } else {
+                                      qtn = qtn - 1;
+                                    }
+                                  });
+                                },
                               ),
                               Text(
-                                '3',
+                                qtn.toString(),
                                 style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 20.0,
@@ -132,7 +147,11 @@ class _DetailsPageState extends State<DetailsPage> {
                               IconButton(
                                 icon: Icon(Icons.add_circle,
                                     color: Color(0xFF5AC035)),
-                                onPressed: () {},
+                                onPressed: () {
+                                  setState(() {
+                                    qtn = qtn + 1;
+                                  });
+                                },
                               )
                             ],
                           ))
@@ -177,7 +196,9 @@ class _DetailsPageState extends State<DetailsPage> {
                         ),
                         SizedBox(width: 10.0),
                         Text(
-                          widget.foodPrice,
+                          'Ugx ' +
+                              nformat
+                                  .format((int.parse(widget.foodPrice)) * qtn),
                           style: TextStyle(
                               fontFamily: 'Montserrat',
                               fontSize: 18.0,
