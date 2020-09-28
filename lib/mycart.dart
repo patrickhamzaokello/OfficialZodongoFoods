@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
-import 'cartdetails.dart';
+import 'foodObject.dart';
+import 'detailPage.dart';
 
-class CheckoutPage extends StatefulWidget {
+class Cart extends StatefulWidget {
+  final List<Food> _cart;
+
+  Cart(this._cart);
+
   @override
-  _CheckoutPageState createState() => _CheckoutPageState();
+  _CartState createState() => _CartState(this._cart);
 }
 
-class _CheckoutPageState extends State<CheckoutPage> {
+class _CartState extends State<Cart> {
+  _CartState(this._cart);
+  List<Food> _cart;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,55 +110,49 @@ class _CheckoutPageState extends State<CheckoutPage> {
               padding: EdgeInsets.only(left: 25.0, right: 20.0),
               children: <Widget>[
                 Padding(
-                    padding: EdgeInsets.only(top: 10.0),
-                    child: Container(
-                        height: MediaQuery.of(context).size.height - 300.0,
-                        child: ListView(children: [
-                          _buildFoodItem(
-                              'assets/plate1.png', 'Salmon', '\UGX 5000'),
-                          _buildFoodItem(
-                              'assets/plate2.png', 'Spring bowl', '\UGX 4000'),
-                          _buildFoodItem(
-                              'assets/plate6.png', 'BBQ Combo', '\UGX 6000'),
-                          _buildFoodItem(
-                              'assets/beans.png', 'Beans Bowl', '\UGX 4500'),
-                          _buildFoodItem(
-                              'assets/burger.png', 'Boo', '\UGX 4000'),
-                          _buildFoodItem(
-                              'assets/chicken.png', 'Muchomo', '\UGX 7000'),
-                          _buildFoodItem(
-                              'assets/macd.png', 'WI-D bowl', '\UGX 5500'),
-                          _buildFoodItem(
-                              'assets/plate5.png', 'Berry bowl', '\UGX 4000')
-                        ]))),
+                  padding: EdgeInsets.only(top: 10.0),
+                  child: Container(
+                    height: MediaQuery.of(context).size.height - 300.0,
+                    child: ListView(
+                      children: [
+                        _buildFoodItem(),
+                      ],
+                    ),
+                  ),
+                ),
                 Container(
                   height: 50.0,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30.0),
                     color: Color(0xFF5AC035),
                   ),
-                  child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'Place',
-                          style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontSize: 17.0,
-                            color: Colors.white,
-                          ),
-                        ),
-                        SizedBox(width: 10.0),
-                        Text(
-                          "Order",
-                          style: TextStyle(
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {});
+                    },
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'Place',
+                            style: TextStyle(
                               fontFamily: 'Montserrat',
-                              fontSize: 18.0,
+                              fontSize: 17.0,
                               color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        )
-                      ],
+                            ),
+                          ),
+                          SizedBox(width: 10.0),
+                          Text(
+                            "Order",
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontSize: 18.0,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 )
@@ -162,14 +164,27 @@ class _CheckoutPageState extends State<CheckoutPage> {
     );
   }
 
-  Widget _buildFoodItem(String imgPath, String foodName, String price) {
-    return Padding(
-        padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
-        child: InkWell(
+  Widget _buildFoodItem() {
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: _cart.length,
+      itemBuilder: (context, index) {
+        var item = _cart[index];
+        return Padding(
+          padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
+          child: InkWell(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
+              Navigator.of(context).push(
+                MaterialPageRoute(
                   builder: (context) => DetailsPage(
-                      heroTag: imgPath, foodName: foodName, foodPrice: price)));
+                    heroTag: item.imagepath,
+                    foodName: item.name,
+                    foodPrice: item.price,
+                    foodDescription: item.decription,
+                  ),
+                ),
+              );
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -177,9 +192,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 Container(
                     child: Row(children: [
                   Hero(
-                      tag: imgPath,
+                      tag: item.imagepath,
                       child: Image(
-                          image: AssetImage(imgPath),
+                          image: AssetImage(item.imagepath),
                           fit: BoxFit.cover,
                           height: 75.0,
                           width: 75.0)),
@@ -187,23 +202,39 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(foodName,
+                        Text(item.name,
                             style: TextStyle(
                                 fontFamily: 'Montserrat',
-                                fontSize: 17.0,
+                                fontSize: 14.0,
                                 fontWeight: FontWeight.bold)),
-                        Text(price,
+                        Text('Ugx ${item.price}',
                             style: TextStyle(
                                 fontFamily: 'Montserrat',
-                                fontSize: 15.0,
+                                fontSize: 13.0,
+                                color: Colors.grey)),
+                        Text('Qtn: ${item.quantity}',
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontSize: 13.0,
                                 color: Colors.grey))
                       ])
                 ])),
                 IconButton(
-                    icon: Icon(Icons.add),
-                    color: Colors.black,
-                    onPressed: () {})
+                    icon: Icon(
+                      Icons.remove_circle,
+                      color: Colors.red,
+                    ),
+                    color: Colors.red,
+                    onPressed: () {
+                      setState(() {
+                        _cart.remove(item);
+                      });
+                    })
               ],
-            )));
+            ),
+          ),
+        );
+      },
+    );
   }
 }

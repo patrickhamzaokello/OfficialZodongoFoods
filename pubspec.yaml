@@ -65,11 +65,7 @@ flutter:
     - assets/plate4.png
     - assets/plate5.png
     - assets/plate6.png
-    - assets/beans.png
-    - assets/macd.png
-    - assets/chicken.png
-    - assets/burger.png
-    - assets/saucesage.png
+    - assets/
 
   fonts:
     - family: Nunito

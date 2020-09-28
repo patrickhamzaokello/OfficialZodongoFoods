@@ -1,63 +1,93 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'detailPage.dart';
-import 'checkout.dart';
-import 'shopping.dart';
+import 'foodObject.dart';
+import 'AboutUs.dart';
+import 'Search.dart';
+import "mycart.dart";
+import 'UserAccount.dart';
 
 class Browse extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          title: Text("Zodongo Foods"),
-          backgroundColor: Color(0xFF5AC035),
-        ),
-        body: Container(
-          child: MyHomePage(),
-        ),
+      title: "Zodongo Foods",
+      theme: ThemeData(
+        primarySwatch: Colors.green,
       ),
+      home: MyHomePage(title: 'Zodongo Foods'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+  final String title;
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<Food> _dishes = List<Food>();
+
+  List<Food> _cartList = List<Food>();
+
+  @override
+  void initState() {
+    super.initState();
+    _populateDishes();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+        actions: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0, top: 8.0),
+            child: GestureDetector(
+              child: Stack(
+                alignment: Alignment.topCenter,
+                children: <Widget>[
+                  Icon(
+                    Icons.shopping_cart,
+                    size: 36.0,
+                  ),
+                  if (_cartList.length > 0)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 2.0),
+                      child: CircleAvatar(
+                        radius: 8.0,
+                        backgroundColor: Colors.red,
+                        foregroundColor: Colors.white,
+                        child: Text(
+                          _cartList.length.toString(),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+              onTap: () {
+                if (_cartList.isNotEmpty)
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => Cart(_cartList),
+                    ),
+                  );
+              },
+            ),
+          )
+        ],
+      ),
       body: ListView(
         children: <Widget>[
           SizedBox(height: 20.0),
-          // Padding(
-          //   padding: EdgeInsets.only(left: 15.0, right: 15.0),
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //     children: <Widget>[
-          //       IconButton(
-          //         onPressed: () {},
-          //         icon: Icon(Icons.menu),
-          //         color: Colors.black,
-          //       ),
-          //       Container(
-          //         height: 40.0,
-          //         width: 40.0,
-          //         decoration: BoxDecoration(
-          //             borderRadius: BorderRadius.circular(7.0),
-          //             image: DecorationImage(
-          //                 image: AssetImage('assets/images/avocado.png'),
-          //                 fit: BoxFit.cover)),
-          //       )
-          //     ],
-          //   ),
-          // ),
           SizedBox(height: 10.0),
           Padding(
             padding: EdgeInsets.only(left: 25.0),
@@ -97,13 +127,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   'This Burger home-cooked food is low salt and low oil with balanced nutrition, selected from high-quality ingredients. This delicious food maybe your best healthy choice.',
                 ),
                 _buildListItem(
-                  'assets/plate6.png',
+                  'assets/images/plate6.png',
                   'BBQ  Plate',
                   '5500',
                   'This light home-cooked food is low salt and low oil with balanced nutrition, selected from high-quality ingredients. This delicious food maybe your best healthy choice.',
                 ),
                 _buildListItem(
-                  'assets/plate3.png',
+                  'assets/images/plate3.png',
                   'Vegan Breakfast',
                   '8000',
                   'This light home-cooked food is low salt and low oil with balanced nutrition, selected from high-quality ingredients. This delicious food maybe your best healthy choice.',
@@ -126,28 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       fontWeight: FontWeight.w600,
                       fontSize: 17.0))),
           SizedBox(height: 20.0),
-          ListView(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.only(right: 20.0),
-              children: [
-                _buildFoodItem('assets/plate1.png', 'Salmon', '5000',
-                    'The Best Beef Burger in the Land'),
-                _buildFoodItem('assets/plate2.png', 'Spring bowl', '4000',
-                    'Spring Bowl made from local available content'),
-                _buildFoodItem('assets/images/plate6.png', 'BBQ Combo', '6000',
-                    'You need to try out our BBQ specially made for your tasty buds'),
-                _buildFoodItem('assets/beans.png', 'Beans Bowl', '4500',
-                    'There is nothing like our own Beans plate that is served with much favour and juice'),
-                _buildFoodItem('assets/images/plate3.png', 'Boo', '4000',
-                    'Lets talk about quality for all the party people'),
-                _buildFoodItem('assets/chicken.png', 'Muchomo', '7000',
-                    'Muchome is the word, get your own from zodongo food'),
-                _buildFoodItem('assets/macd.png', 'WI-D bowl', '5500',
-                    'Mach and Cheese, we make it all. Try it out with us'),
-                _buildFoodItem('assets/plate5.png', 'Berry bowl', '4000',
-                    'For all the Vegan Friends out there. we gat what you need ')
-              ]),
+          _buildListView(),
         ],
       ),
       bottomNavigationBar: Container(
@@ -163,127 +172,35 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             IconButton(
               onPressed: () {
-                // Navigator.of(context).push(
-                //   (MaterialPageRoute(builder: (context) => ShoppingCart())),
-                // );
+                Navigator.of(context).push(
+                  (MaterialPageRoute(builder: (context) => AboutUs())),
+                );
               },
               icon: Icon(
                 Icons.bookmark_border,
                 color: Colors.white,
               ),
             ),
-            Icon(
-              Icons.search,
-              color: Colors.white,
-            ),
-            Icon(
-              Icons.person_outline,
-              color: Colors.white,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 2.0),
-              child: GestureDetector(
-                child: Stack(
-                  alignment: Alignment.topCenter,
-                  children: <Widget>[
-                    Icon(
-                      Icons.shopping_cart,
-                      color: Colors.white,
-                      size: 25.0,
-                    ),
-                    if (savedWords.length > 0)
-                      Padding(
-                        padding: const EdgeInsets.only(left: 2.0),
-                        child: CircleAvatar(
-                          radius: 8.0,
-                          backgroundColor: Colors.red,
-                          foregroundColor: Colors.white,
-                          child: Text(
-                            savedWords.length.toString(),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                  ],
+            IconButton(
+                icon: Icon(
+                  Icons.search,
+                  color: Colors.white,
                 ),
-                onTap: () {
-                  if (savedWords.isNotEmpty)
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => CheckoutPage(),
-                      ),
-                    );
-                },
+                onPressed: () {
+                  Navigator.of(context).push(
+                    (MaterialPageRoute(builder: (context) => SearchFood())),
+                  );
+                }),
+            IconButton(
+              icon: Icon(
+                Icons.person_outline,
+                color: Colors.white,
               ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Set<String> savedWords = Set<String>();
-
-  Widget _buildFoodItem(
-      String imgPath, String foodName, String price, String description) {
-    bool isSaved = savedWords.contains(foodName);
-
-    return Padding(
-      padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
-      child: InkWell(
-        onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => DetailsPage(
-                    heroTag: imgPath,
-                    foodName: foodName,
-                    foodPrice: price,
-                    foodDescription: description,
-                  )));
-        },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Container(
-                child: Row(children: [
-              Hero(
-                  tag: imgPath,
-                  child: Image(
-                      image: AssetImage(imgPath),
-                      fit: BoxFit.cover,
-                      height: 75.0,
-                      width: 75.0)),
-              SizedBox(width: 10.0),
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text(foodName,
-                    style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontSize: 17.0,
-                        fontWeight: FontWeight.bold)),
-                Text('UGX $price',
-                    style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontSize: 15.0,
-                        color: Colors.grey))
-              ])
-            ])),
-            GestureDetector(
-              onTap: () {
-                setState(() {
-                  if (isSaved) {
-                    savedWords.remove(foodName);
-                  } else {
-                    savedWords.add(foodName);
-                  }
-                });
-                print(savedWords);
+              onPressed: () {
+                Navigator.of(context).push(
+                  (MaterialPageRoute(builder: (context) => UserAccount())),
+                );
               },
-              child: Icon(
-                isSaved ? Icons.favorite : Icons.add,
-                color: isSaved ? Colors.red : null,
-              ),
             ),
           ],
         ),
@@ -410,5 +327,138 @@ class _MyHomePageState extends State<MyHomePage> {
                         ))
                   ],
                 ))));
+  }
+
+  ListView _buildListView() {
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.only(right: 20.0),
+      itemCount: _dishes.length,
+      itemBuilder: (context, index) {
+        var item = _dishes[index];
+        return Padding(
+          padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
+          child: InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => DetailsPage(
+                        heroTag: item.imagepath,
+                        foodName: item.name,
+                        foodPrice: item.price,
+                        foodDescription: item.decription,
+                      )));
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Container(
+                    child: Row(children: [
+                  Hero(
+                      tag: item.imagepath,
+                      child: Image(
+                          image: AssetImage(item.imagepath),
+                          fit: BoxFit.cover,
+                          height: 75.0,
+                          width: 75.0)),
+                  SizedBox(width: 10.0),
+                  Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(item.name,
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold)),
+                        Text('UGX ${item.price}',
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontSize: 14.0,
+                                color: Colors.grey))
+                      ])
+                ])),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      if (!_cartList.contains(item))
+                        _cartList.add(item);
+                      else
+                        _cartList.remove(item);
+                    });
+                  },
+                  child: (!_cartList.contains(item))
+                      ? Icon(
+                          Icons.add_circle,
+                          color: Colors.green,
+                        )
+                      : Icon(
+                          Icons.remove_circle,
+                          color: Colors.red,
+                        ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _populateDishes() {
+    var list = <Food>[
+      Food(
+        name: 'Chicken Zinger',
+        price: '5000',
+        decription: 'The Best Beef Burger in the Land',
+        imagepath: 'assets/plate1.png',
+        quantity: 1,
+      ),
+      Food(
+        name: 'Chicken',
+        price: '2000',
+        decription: 'Patrick Hamza okello',
+        imagepath: 'assets/plate2.png',
+        quantity: 1,
+      ),
+      Food(
+        name: 'Rice',
+        price: '5000',
+        decription: 'The Best Beef Burger in the Land',
+        imagepath: 'assets/plate3.png',
+        quantity: 1,
+      ),
+      Food(
+        name: 'Beef',
+        price: '5000',
+        decription: 'The Best Beef Burger in the Land',
+        imagepath: 'assets/plate4.png',
+        quantity: 1,
+      ),
+      Food(
+        name: 'Laptop',
+        price: '5000',
+        decription: 'The Best Beef Burger in the Land',
+        imagepath: 'assets/saucesage.png',
+        quantity: 1,
+      ),
+      Food(
+        name: 'Mac',
+        price: '5000',
+        decription: 'The Best Beef Burger in the Land',
+        imagepath: 'assets/plate5.png',
+        quantity: 1,
+      ),
+      Food(
+        name: 'Mac',
+        price: '5000',
+        decription: 'The Best Beef Burger in the Land',
+        imagepath: 'assets/plate6.png',
+        quantity: 1,
+      ),
+    ];
+
+    setState(() {
+      _dishes = list;
+    });
   }
 }

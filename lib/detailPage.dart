@@ -19,8 +19,6 @@ class _DetailsPageState extends State<DetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    // int foodprice = int.parse(widget.foodPrice);
-
     var nformat = NumberFormat("#,##0", "en_US");
 
     return Scaffold(
