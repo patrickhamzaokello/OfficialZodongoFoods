@@ -56,7 +56,7 @@ class _DetailsPageState extends State<DetailsPage> {
                   icon: Icon(Icons.arrow_back_ios),
                   color: Colors.white,
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.of(context).pop(qtn);
                   },
                 ),
               ),

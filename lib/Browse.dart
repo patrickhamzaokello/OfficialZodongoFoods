@@ -6,6 +6,9 @@ import 'AboutUs.dart';
 import 'Search.dart';
 import "mycart.dart";
 import 'UserAccount.dart';
+import 'package:intl/intl.dart';
+
+var numformat = NumberFormat("#,##0", "en_US");
 
 class Browse extends StatelessWidget {
   @override
@@ -315,7 +318,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                             color: Colors.green, size: 14.0),
                                       ],
                                     ),
-                                    Text('Ugx ' + price,
+                                    Text(
+                                        'Ugx ' +
+                                            numformat.format(
+                                              int.parse(price),
+                                            ),
                                         style: TextStyle(
                                             fontFamily: 'Montserrat',
                                             fontWeight: FontWeight.w500,
@@ -329,6 +336,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ))));
   }
 
+  List<int> totalprice = [];
+
   ListView _buildListView() {
     return ListView.builder(
       shrinkWrap: true,
@@ -337,17 +346,26 @@ class _MyHomePageState extends State<MyHomePage> {
       itemCount: _dishes.length,
       itemBuilder: (context, index) {
         var item = _dishes[index];
+        int totalpsrice = (int.parse(item.price));
+
         return Padding(
           padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
           child: InkWell(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
+            onTap: () async {
+              final result = await Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => DetailsPage(
                         heroTag: item.imagepath,
                         foodName: item.name,
                         foodPrice: item.price,
                         foodDescription: item.decription,
+                        // foodqtn: item.quantity,
                       )));
+
+              setState(() {
+                item.quantity = result;
+
+                print("quantity: ${item.quantity}");
+              });
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -370,7 +388,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 fontFamily: 'Montserrat',
                                 fontSize: 15.0,
                                 fontWeight: FontWeight.bold)),
-                        Text('UGX ${item.price}',
+                        Text('UGX ' + numformat.format(int.parse(item.price)),
                             style: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontSize: 14.0,
@@ -380,10 +398,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 GestureDetector(
                   onTap: () {
                     setState(() {
-                      if (!_cartList.contains(item))
+                      if (!_cartList.contains(item)) {
                         _cartList.add(item);
-                      else
+
+                        totalprice.add(totalpsrice);
+
+                        print("total $totalprice");
+                      } else {
                         _cartList.remove(item);
+                        totalprice.remove(totalpsrice);
+                      }
                     });
                   },
                   child: (!_cartList.contains(item))

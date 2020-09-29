@@ -3,7 +3,7 @@ class Food {
   final String price;
   final String decription;
   final String imagepath;
-  final int quantity;
+  int quantity;
 
   Food({this.name, this.price, this.decription, this.imagepath, this.quantity});
 }

@@ -174,17 +174,21 @@ class _CartState extends State<Cart> {
         return Padding(
           padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
           child: InkWell(
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
+            onTap: () async {
+              final result = await Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => DetailsPage(
-                    heroTag: item.imagepath,
-                    foodName: item.name,
-                    foodPrice: item.price,
-                    foodDescription: item.decription,
-                  ),
-                ),
-              );
+                        heroTag: item.imagepath,
+                        foodName: item.name,
+                        foodPrice: item.price,
+                        foodDescription: item.decription,
+                        // foodqtn: item.quantity,
+                      )));
+
+              setState(() {
+                item.quantity = result;
+
+                print("quantity: ${item.quantity}");
+              });
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -228,6 +232,8 @@ class _CartState extends State<Cart> {
                     onPressed: () {
                       setState(() {
                         _cart.remove(item);
+                        // totalprice.remove(totalpsrice);
+                        // print("total $totalprice");
                       });
                     })
               ],
