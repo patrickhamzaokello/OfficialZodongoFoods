@@ -4,16 +4,18 @@ import 'detailPage.dart';
 
 class Cart extends StatefulWidget {
   final List<Food> _cart;
+  final int bill;
 
-  Cart(this._cart);
+  Cart(this._cart, this.bill);
 
   @override
-  _CartState createState() => _CartState(this._cart);
+  _CartState createState() => _CartState(this._cart, this.bill);
 }
 
 class _CartState extends State<Cart> {
-  _CartState(this._cart);
+  _CartState(this._cart, this.bill);
   List<Food> _cart;
+  int bill;
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +90,7 @@ class _CartState extends State<Cart> {
                 ),
                 SizedBox(width: 10.0),
                 Text(
-                  'Ugx 78,000',
+                  bill.toString(),
                   style: TextStyle(
                       fontFamily: 'Montserrat',
                       fontSize: 18.0,
@@ -234,6 +236,7 @@ class _CartState extends State<Cart> {
                         _cart.remove(item);
                         // totalprice.remove(totalpsrice);
                         // print("total $totalprice");
+                        bill = bill - (int.parse(item.price));
                       });
                     })
               ],

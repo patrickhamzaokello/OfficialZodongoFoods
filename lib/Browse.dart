@@ -9,6 +9,7 @@ import 'UserAccount.dart';
 import 'package:intl/intl.dart';
 
 var numformat = NumberFormat("#,##0", "en_US");
+List<int> totalprice = [];
 
 class Browse extends StatelessWidget {
   @override
@@ -35,6 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Food> _dishes = List<Food>();
 
   List<Food> _cartList = List<Food>();
+  int billtotal;
 
   @override
   void initState() {
@@ -80,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 if (_cartList.isNotEmpty)
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => Cart(_cartList),
+                      builder: (context) => Cart(_cartList, billtotal),
                     ),
                   );
               },
@@ -219,13 +221,16 @@ class _MyHomePageState extends State<MyHomePage> {
   ) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).push((MaterialPageRoute(
+        Navigator.of(context).push(
+          (MaterialPageRoute(
             builder: (context) => DetailsPage(
-                  heroTag: imgPath,
-                  foodName: foodName,
-                  foodPrice: price,
-                  foodDescription: description,
-                ))));
+              heroTag: imgPath,
+              foodName: foodName,
+              foodPrice: price,
+              foodDescription: description,
+            ),
+          )),
+        );
       },
       child: Padding(
         padding: EdgeInsets.only(left: 20.0, top: 10.0, bottom: 4.0),
@@ -341,8 +346,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  List<int> totalprice = [];
-
   ListView _buildListView() {
     return ListView.builder(
       shrinkWrap: true,
@@ -352,6 +355,11 @@ class _MyHomePageState extends State<MyHomePage> {
       itemBuilder: (context, index) {
         var item = _dishes[index];
         int totalpsrice = (int.parse(item.price));
+
+        var sum = 0;
+        totalprice.forEach((e) => sum += e);
+        billtotal = sum;
+        print("bill total: $billtotal");
 
         return Padding(
           padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
