@@ -360,7 +360,7 @@ class _MyHomePageState extends State<MyHomePage> {
         var sum = 0;
         totalprice.forEach((e) => sum += e);
         billtotal = sum;
-        print("bill total: $billtotal");
+        // print("bill total: $billtotal");
 
         return Padding(
           padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
@@ -378,7 +378,7 @@ class _MyHomePageState extends State<MyHomePage> {
               setState(() {
                 item.quantity = result;
 
-                print("quantity: ${item.quantity}");
+                // print("quantity: ${item.quantity}");
               });
             },
             child: Row(
@@ -417,11 +417,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
                         totalprice.add(totalpsrice);
 
-                        print("total $totalprice");
+                        // print("total $totalprice");
                       } else {
                         _cartList.remove(item);
                         totalprice.remove(totalpsrice);
-                        print("total $totalprice");
+                        // print("total $totalprice");
                       }
                     });
                   },

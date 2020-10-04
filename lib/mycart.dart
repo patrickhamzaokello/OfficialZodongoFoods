@@ -195,7 +195,7 @@ class _CartState extends State<Cart> {
               setState(() {
                 item.quantity = result;
 
-                print("quantity: ${item.quantity}");
+                // print("quantity: ${item.quantity}");
               });
             },
             child: Row(
