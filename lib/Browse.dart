@@ -82,7 +82,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 if (_cartList.isNotEmpty)
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => Cart(_cartList, billtotal),
+                      builder: (context) =>
+                          Cart(_cartList, totalprice, billtotal),
                     ),
                   );
               },

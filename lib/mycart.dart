@@ -4,17 +4,20 @@ import 'detailPage.dart';
 
 class Cart extends StatefulWidget {
   final List<Food> _cart;
+  final List<int> totalcost;
   final int bill;
 
-  Cart(this._cart, this.bill);
+  Cart(this._cart, this.totalcost, this.bill);
 
   @override
-  _CartState createState() => _CartState(this._cart, this.bill);
+  _CartState createState() => _CartState(this._cart, this.totalcost, this.bill);
 }
 
 class _CartState extends State<Cart> {
-  _CartState(this._cart, this.bill);
+  _CartState(this._cart, this.totalcost, this.bill);
   List<Food> _cart;
+  List<int> totalcost;
+
   int bill;
 
   @override
@@ -130,6 +133,7 @@ class _CartState extends State<Cart> {
                   ),
                   child: GestureDetector(
                     onTap: () {
+                      print("placing order clicke");
                       setState(() {});
                     },
                     child: Center(
@@ -173,6 +177,8 @@ class _CartState extends State<Cart> {
       itemCount: _cart.length,
       itemBuilder: (context, index) {
         var item = _cart[index];
+        int totalpsrice = (int.parse(item.price));
+
         return Padding(
           padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
           child: InkWell(
@@ -235,6 +241,7 @@ class _CartState extends State<Cart> {
                       setState(() {
                         _cart.remove(item);
                         // totalprice.remove(totalpsrice);
+                        totalcost.remove(totalpsrice);
                         // print("total $totalprice");
                         bill = bill - (int.parse(item.price));
                       });
