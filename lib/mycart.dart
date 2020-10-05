@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutterloginui/popus/confirmation.dart';
 import 'package:flutterloginui/providers/products_provider.dart';
 import 'package:provider/provider.dart';
 import 'foodObject.dart';
 import 'detailPage.dart';
+import 'dart:io';
 
 class Cart extends StatefulWidget {
   final List<Food> _cart;
@@ -135,11 +137,39 @@ class _CartState extends State<Cart> {
                     color: Color(0xFF5AC035),
                   ),
                   child: GestureDetector(
-                    onTap: () {
-                      productProvider.saveProduct();
-
-                      Navigator.of(context).pop();
-                      // setState(() {});
+                    onTap: () async {
+                      try {
+                        final result =
+                            await InternetAddress.lookup('google.com');
+                        if (result.isNotEmpty &&
+                            result[0].rawAddress.isNotEmpty) {
+                          // print('connected');
+                          productProvider.saveProduct();
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) => CustomDialog(
+                              title: "Success",
+                              description:
+                                  "Your Order has been Received! Thank You",
+                              buttonText: "Okay",
+                            ),
+                          );
+                          _cart.clear();
+                          Navigator.of(context).pop();
+                          // setState(() {});
+                        }
+                      } on SocketException catch (_) {
+                        // print('not connected');
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => CustomDialog(
+                            title: "Failed",
+                            description:
+                                "Order Failed, No Internet Connection. Please Try again",
+                            buttonText: "Okay",
+                          ),
+                        );
+                      }
                     },
                     child: Center(
                       child: Row(

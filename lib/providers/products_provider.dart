@@ -41,6 +41,11 @@ class ProductProvider with ChangeNotifier {
         decription: "The best Pork chops ever",
         imagepath: "https://www.google.com/pkasemer",
         foodid: uuid.v4());
-    firestoreService.saveFood(newFood);
+    firestoreService.saveFood(newFood).then((result) {
+      // print("Success!");
+    }).catchError((error) {
+      // print("Error!");
+      return;
+    });
   }
 }
