@@ -144,7 +144,7 @@ class _CartState extends State<Cart> {
                         if (result.isNotEmpty &&
                             result[0].rawAddress.isNotEmpty) {
                           // print('connected');
-                          productProvider.saveProduct();
+                          productProvider.saveProduct(_cart);
                           showDialog(
                             context: context,
                             builder: (BuildContext context) => CustomDialog(
@@ -154,7 +154,7 @@ class _CartState extends State<Cart> {
                               buttonText: "Okay",
                             ),
                           );
-                          _cart.clear();
+                          // _cart.clear();
                           Navigator.of(context).pop();
                           // setState(() {});
                         }

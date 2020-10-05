@@ -182,7 +182,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.of(context).push(
                   (MaterialPageRoute(builder: (context) => AboutUs())),
                 );
-             
               },
               icon: Icon(
                 Icons.bookmark_border,
@@ -450,21 +449,21 @@ class _MyHomePageState extends State<MyHomePage> {
       Food(
         name: 'Chicken Zinger',
         price: '5000',
-        decription: 'The Best Beef Burger in the Land',
+        decription: 'Zinge that meal and rock your pallete',
         imagepath: 'assets/plate1.png',
         quantity: 1,
       ),
       Food(
         name: 'Chicken',
         price: '2000',
-        decription: 'Patrick Hamza okello',
+        decription: 'Favourite Chicken Plaza Meant for you',
         imagepath: 'assets/plate2.png',
         quantity: 1,
       ),
       Food(
         name: 'Rice',
         price: '5000',
-        decription: 'The Best Beef Burger in the Land',
+        decription: 'The assorted Rice content meant for you',
         imagepath: 'assets/plate3.png',
         quantity: 1,
       ),
@@ -476,23 +475,23 @@ class _MyHomePageState extends State<MyHomePage> {
         quantity: 1,
       ),
       Food(
-        name: 'Laptop',
+        name: 'Sausage ',
         price: '5000',
-        decription: 'The Best Beef Burger in the Land',
+        decription: 'checkout our sauage',
         imagepath: 'assets/saucesage.png',
         quantity: 1,
       ),
       Food(
-        name: 'Mac',
+        name: 'Deck',
         price: '5000',
-        decription: 'The Best Beef Burger in the Land',
+        decription: 'Where all the local foods meet and dine',
         imagepath: 'assets/plate5.png',
         quantity: 1,
       ),
       Food(
         name: 'Mac',
         price: '5000',
-        decription: 'The Best Beef Burger in the Land',
+        decription: 'Favourite Mac Food meant for you',
         imagepath: 'assets/plate6.png',
         quantity: 1,
       ),

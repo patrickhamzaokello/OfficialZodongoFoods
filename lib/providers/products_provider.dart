@@ -32,17 +32,16 @@ class ProductProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  saveProduct() {
-    // print("product saved");
-    var newFood = Food(
-        name: "pork",
-        price: "2500",
-        quantity: 1,
-        decription: "The best Pork chops ever",
-        imagepath: "https://www.google.com/pkasemer",
-        foodid: uuid.v4());
-    firestoreService.saveFood(newFood).then((result) {
-      // print("Success!");
+  saveProduct(List<Food> mycart) {
+    // var newFood = Food(
+    //     name: "pork",
+    //     price: "2500",
+    //     quantity: 1,
+    //     decription: "The best Pork chops ever",
+    //     imagepath: "https://www.google.com/pkasemer",
+    //     foodid: uuid.v4());
+    firestoreService.saveFood(mycart).then((result) {
+      print("Success!");
     }).catchError((error) {
       // print("Error!");
       return;
