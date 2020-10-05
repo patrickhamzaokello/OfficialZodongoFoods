@@ -10,11 +10,11 @@ class FirestoreService {
     var pk;
     var uuid = Uuid();
 
-    var time = (DateTime).toString();
+    var time = (Timestamp.now()).toString();
 
     for (var i = 0; i < food.length; i++) {
       pk = _db
-          .collection('myCart')
+          .collection('FoodCart')
           .doc('0777676206')
           .collection("sedrick")
           .doc(time)

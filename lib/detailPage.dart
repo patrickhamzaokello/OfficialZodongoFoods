@@ -6,20 +6,35 @@ class DetailsPage extends StatefulWidget {
   final foodName;
   final foodPrice;
   final foodDescription;
+  final foodqtn;
 
   DetailsPage(
-      {this.heroTag, this.foodName, this.foodPrice, this.foodDescription});
+      {this.heroTag,
+      this.foodName,
+      this.foodPrice,
+      this.foodDescription,
+      this.foodqtn});
 
   @override
-  _DetailsPageState createState() => _DetailsPageState();
+  _DetailsPageState createState() => _DetailsPageState(this.heroTag,
+      this.foodName, this.foodPrice, this.foodDescription, this.foodqtn);
 }
 
 class _DetailsPageState extends State<DetailsPage> {
-  int qtn = 1;
+  _DetailsPageState(this.heroTag, this.foodName, this.foodPrice,
+      this.foodDescription, this.foodqtn);
 
+  String heroTag;
+  String foodName;
+  String foodPrice;
+  String foodDescription;
+  int foodqtn;
   @override
   Widget build(BuildContext context) {
     var nformat = NumberFormat("#,##0", "en_US");
+    // int qtn = foodqtn;
+
+    print("Patrick $foodqtn");
 
     return Scaffold(
       body: ListView(
@@ -56,7 +71,7 @@ class _DetailsPageState extends State<DetailsPage> {
                   icon: Icon(Icons.arrow_back_ios),
                   color: Colors.white,
                   onPressed: () {
-                    Navigator.of(context).pop(qtn);
+                    Navigator.of(context).pop(foodqtn);
                   },
                 ),
               ),
@@ -127,16 +142,16 @@ class _DetailsPageState extends State<DetailsPage> {
                                     color: Color(0xFF5CB238)),
                                 onPressed: () {
                                   setState(() {
-                                    if (qtn == 1) {
-                                      qtn = 1;
+                                    if (foodqtn == 1) {
+                                      foodqtn = 1;
                                     } else {
-                                      qtn = qtn - 1;
+                                      foodqtn = foodqtn - 1;
                                     }
                                   });
                                 },
                               ),
                               Text(
-                                qtn.toString(),
+                                foodqtn.toString(),
                                 style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 20.0,
@@ -147,7 +162,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                     color: Color(0xFF5AC035)),
                                 onPressed: () {
                                   setState(() {
-                                    qtn = qtn + 1;
+                                    foodqtn = foodqtn + 1;
                                   });
                                 },
                               )
@@ -195,8 +210,8 @@ class _DetailsPageState extends State<DetailsPage> {
                         SizedBox(width: 10.0),
                         Text(
                           'Ugx ' +
-                              nformat
-                                  .format((int.parse(widget.foodPrice)) * qtn),
+                              nformat.format(
+                                  (int.parse(widget.foodPrice)) * foodqtn),
                           style: TextStyle(
                               fontFamily: 'Montserrat',
                               fontSize: 18.0,

@@ -10,7 +10,6 @@ import 'UserAccount.dart';
 import 'package:intl/intl.dart';
 
 var numformat = NumberFormat("#,##0", "en_US");
-List<int> totalprice = [];
 
 class Browse extends StatelessWidget {
   @override
@@ -37,7 +36,6 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Food> _dishes = List<Food>();
 
   List<Food> _cartList = List<Food>();
-  int billtotal;
 
   @override
   void initState() {
@@ -82,9 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onTap: () async {
                 if (_cartList.isNotEmpty) {
                   final result = await Navigator.of(context).push(
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              Cart(_cartList, totalprice, billtotal)));
+                      MaterialPageRoute(builder: (context) => Cart(_cartList)));
 
                   setState(() {
                     _cartList = result;
@@ -370,11 +366,7 @@ class _MyHomePageState extends State<MyHomePage> {
       itemCount: _dishes.length,
       itemBuilder: (context, index) {
         var item = _dishes[index];
-        int totalpsrice = (int.parse(item.price));
 
-        var sum = 0;
-        totalprice.forEach((e) => sum += e);
-        billtotal = sum;
         // print("bill total: $billtotal");
 
         return Padding(
@@ -387,7 +379,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         foodName: item.name,
                         foodPrice: item.price,
                         foodDescription: item.decription,
-                        // foodqtn: item.quantity,
+                        foodqtn: item.quantity,
                       )));
 
               setState(() {
@@ -429,14 +421,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     setState(() {
                       if (!_cartList.contains(item)) {
                         _cartList.add(item);
-
-                        totalprice.add(totalpsrice);
-
-                        // print("total $totalprice");
                       } else {
                         _cartList.remove(item);
-                        totalprice.remove(totalpsrice);
-                        // print("total $totalprice");
                       }
                     });
                   },

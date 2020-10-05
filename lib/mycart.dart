@@ -6,27 +6,32 @@ import 'foodObject.dart';
 import 'detailPage.dart';
 import 'dart:io';
 
+int bill = 0;
+
 class Cart extends StatefulWidget {
   final List<Food> _cart;
-  final List<int> totalcost;
-  final int bill;
 
-  Cart(this._cart, this.totalcost, this.bill);
+  Cart(this._cart);
 
   @override
-  _CartState createState() => _CartState(this._cart, this.totalcost, this.bill);
+  _CartState createState() => _CartState(this._cart);
 }
 
 class _CartState extends State<Cart> {
-  _CartState(this._cart, this.totalcost, this.bill);
+  _CartState(this._cart);
   List<Food> _cart;
-  List<int> totalcost;
-
-  int bill;
 
   @override
   Widget build(BuildContext context) {
+    var total = 0;
+    for (var i = 0; i < _cart.length; i++) {
+      total = total + int.parse(_cart[i].price);
+      print("totalprice $total");
+    }
+    bill = total;
+
     final productProvider = Provider.of<ProductProvider>(context);
+
     return Scaffold(
       backgroundColor: Color(0xFF5AC035),
       body: ListView(
@@ -155,6 +160,7 @@ class _CartState extends State<Cart> {
                             ),
                           );
                           _cart.clear();
+                          // bill = 0;
                           Navigator.of(context).pop(_cart);
                           // setState(() {});
                         }
@@ -212,7 +218,12 @@ class _CartState extends State<Cart> {
       itemCount: _cart.length,
       itemBuilder: (context, index) {
         var item = _cart[index];
-        int totalpsrice = (int.parse(item.price));
+        // int totalpsrice = (int.parse(item.price));
+        // int totalpsrice = (int.parse(item.price));
+
+        // var sum = 0;
+        // totalprice.forEach((e) => sum += e);
+        // billtotal = sum;
 
         return Padding(
           padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
@@ -224,7 +235,7 @@ class _CartState extends State<Cart> {
                         foodName: item.name,
                         foodPrice: item.price,
                         foodDescription: item.decription,
-                        // foodqtn: item.quantity,
+                        foodqtn: item.quantity,
                       )));
 
               setState(() {
@@ -274,11 +285,10 @@ class _CartState extends State<Cart> {
                     color: Colors.red,
                     onPressed: () {
                       setState(() {
+                        var newbill = bill - (int.parse(item.price));
+                        bill = newbill;
                         _cart.remove(item);
-                        // totalprice.remove(totalpsrice);
-                        totalcost.remove(totalpsrice);
-                        // print("total $totalprice");
-                        bill = bill - (int.parse(item.price));
+                        print("remained $bill");
                       });
                     })
               ],
