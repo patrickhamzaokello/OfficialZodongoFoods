@@ -18,6 +18,7 @@ class Food {
     return {
       'foodid': foodid,
       'name': name,
+      'price': price,
       'description': decription,
       'imagepath': imagepath,
       'quantity': quantity

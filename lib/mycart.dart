@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutterloginui/providers/products_provider.dart';
+import 'package:provider/provider.dart';
 import 'foodObject.dart';
 import 'detailPage.dart';
 
@@ -22,6 +24,7 @@ class _CartState extends State<Cart> {
 
   @override
   Widget build(BuildContext context) {
+    final productProvider = Provider.of<ProductProvider>(context);
     return Scaffold(
       backgroundColor: Color(0xFF5AC035),
       body: ListView(
@@ -133,8 +136,10 @@ class _CartState extends State<Cart> {
                   ),
                   child: GestureDetector(
                     onTap: () {
-                      print("placing order clicke");
-                      setState(() {});
+                      productProvider.saveProduct();
+
+                      Navigator.of(context).pop();
+                      // setState(() {});
                     },
                     child: Center(
                       child: Row(
