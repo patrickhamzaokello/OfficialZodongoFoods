@@ -10,8 +10,17 @@ class FirestoreService {
     var pk;
     var uuid = Uuid();
 
+    var time = (DateTime).toString();
+
     for (var i = 0; i < food.length; i++) {
-      pk = _db.collection('myCart').doc(uuid.v4()).set(food[i].toMap());
+      pk = _db
+          .collection('myCart')
+          .doc('0777676206')
+          .collection("sedrick")
+          .doc(time)
+          .collection("order")
+          .doc(food[i].name)
+          .set(food[i].toMap());
     }
     return pk;
   }

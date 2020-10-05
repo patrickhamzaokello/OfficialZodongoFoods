@@ -16,11 +16,11 @@ class Food {
 
   Map<String, dynamic> toMap() {
     return {
-      'foodid': foodid,
+      // 'foodid': foodid,
       'name': name,
       'price': price,
       'description': decription,
-      'imagepath': imagepath,
+      // 'imagepath': imagepath,
       'quantity': quantity
     };
   }

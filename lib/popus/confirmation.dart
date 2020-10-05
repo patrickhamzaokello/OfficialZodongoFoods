@@ -83,7 +83,7 @@ class CustomDialog extends StatelessWidget {
           left: Consts.padding,
           right: Consts.padding,
           child: CircleAvatar(
-            backgroundColor: Color(0xFFFF9800),
+            backgroundColor: Color(0xFF5AC035),
             radius: Consts.avatarRadius,
           ),
         ),

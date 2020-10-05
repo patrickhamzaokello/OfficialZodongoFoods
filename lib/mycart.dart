@@ -40,7 +40,7 @@ class _CartState extends State<Cart> {
                   icon: Icon(Icons.arrow_back_ios),
                   color: Colors.white,
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.of(context).pop(_cart);
                   },
                 ),
                 Container(
@@ -154,8 +154,8 @@ class _CartState extends State<Cart> {
                               buttonText: "Okay",
                             ),
                           );
-                          // _cart.clear();
-                          Navigator.of(context).pop();
+                          _cart.clear();
+                          Navigator.of(context).pop(_cart);
                           // setState(() {});
                         }
                       } on SocketException catch (_) {

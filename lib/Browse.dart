@@ -79,14 +79,28 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                 ],
               ),
-              onTap: () {
-                if (_cartList.isNotEmpty)
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          Cart(_cartList, totalprice, billtotal),
+              onTap: () async {
+                if (_cartList.isNotEmpty) {
+                  final result = await Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              Cart(_cartList, totalprice, billtotal)));
+
+                  setState(() {
+                    _cartList = result;
+
+                    // print("quantity: ${item.quantity}");
+                  });
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) => CustomDialog(
+                      title: "Empty Cart",
+                      description: "Please Add Food to Cart First!",
+                      buttonText: "Okay",
                     ),
                   );
+                }
               },
             ),
           )
