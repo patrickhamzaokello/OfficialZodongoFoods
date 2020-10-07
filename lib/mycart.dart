@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutterloginui/CartFoodDetail.dart';
 import 'package:flutterloginui/popus/confirmation.dart';
 import 'package:flutterloginui/providers/products_provider.dart';
 import 'package:provider/provider.dart';
 import 'foodObject.dart';
-import 'detailPage.dart';
 import 'dart:io';
 
 int bill = 0;
@@ -230,7 +230,7 @@ class _CartState extends State<Cart> {
           child: InkWell(
             onTap: () async {
               final result = await Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => DetailsPage(
+                  builder: (context) => CartFoodDetail(
                         heroTag: item.imagepath,
                         foodName: item.name,
                         foodPrice: item.price,
@@ -241,7 +241,9 @@ class _CartState extends State<Cart> {
               setState(() {
                 item.quantity = result;
 
-                // print("quantity: ${item.quantity}");
+                item.price = ((int.parse(item.price)) * result).toString();
+
+                print("quantity: ${item.price}");
               });
             },
             child: Row(

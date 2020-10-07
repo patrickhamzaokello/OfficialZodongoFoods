@@ -1,36 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class DetailsPage extends StatefulWidget {
+class CartFoodDetail extends StatefulWidget {
   final heroTag;
   final foodName;
   final foodPrice;
   final foodDescription;
+  final foodqtn;
 
-  DetailsPage({
-    this.heroTag,
-    this.foodName,
-    this.foodPrice,
-    this.foodDescription,
-  });
+  CartFoodDetail(
+      {this.heroTag,
+      this.foodName,
+      this.foodPrice,
+      this.foodDescription,
+      this.foodqtn});
 
   @override
-  _DetailsPageState createState() => _DetailsPageState(
-      this.heroTag, this.foodName, this.foodPrice, this.foodDescription);
+  _CartFoodDetailState createState() => _CartFoodDetailState(this.heroTag,
+      this.foodName, this.foodPrice, this.foodDescription, this.foodqtn);
 }
 
-class _DetailsPageState extends State<DetailsPage> {
-  _DetailsPageState(
-      this.heroTag, this.foodName, this.foodPrice, this.foodDescription);
+class _CartFoodDetailState extends State<CartFoodDetail> {
+  _CartFoodDetailState(this.heroTag, this.foodName, this.foodPrice,
+      this.foodDescription, this.foodqtn);
 
   String heroTag;
   String foodName;
   String foodPrice;
   String foodDescription;
+  int foodqtn;
   @override
   Widget build(BuildContext context) {
     var nformat = NumberFormat("#,##0", "en_US");
     // int qtn = foodqtn;
+
+    print("Patrick $foodqtn");
 
     return Scaffold(
       body: ListView(
@@ -67,7 +71,7 @@ class _DetailsPageState extends State<DetailsPage> {
                   icon: Icon(Icons.arrow_back_ios),
                   color: Colors.white,
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.of(context).pop(foodqtn);
                   },
                 ),
               ),
@@ -124,47 +128,46 @@ class _DetailsPageState extends State<DetailsPage> {
                             color: Colors.black,
                             fontSize: 17.0),
                       ),
-                      // Container(
-                      //   width: 125.0,
-                      //   height: 40.0,
-                      //   decoration: BoxDecoration(
-                      //       borderRadius: BorderRadius.circular(25.0),
-                      //       color: Color(0xFFEDFEE5)),
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //     children: <Widget>[
-                      //       IconButton(
-                      //         icon: Icon(Icons.remove_circle_outline,
-                      //             color: Color(0xFF5CB238)),
-                      //         onPressed: () {
-                      //           setState(() {
-                      //             if (foodqtn == 1) {
-                      //               foodqtn = 1;
-                      //             } else {
-                      //               foodqtn = foodqtn - 1;
-                      //             }
-                      //           });
-                      //         },
-                      //       ),
-                      //       Text(
-                      //         foodqtn.toString(),
-                      //         style: TextStyle(
-                      //             fontFamily: 'Montserrat',
-                      //             fontSize: 20.0,
-                      //             color: Color(0xFF5CB238)),
-                      //       ),
-                      //       IconButton(
-                      //         icon: Icon(Icons.add_circle,
-                      //             color: Color(0xFF5AC035)),
-                      //         onPressed: () {
-                      //           setState(() {
-                      //             foodqtn = foodqtn + 1;
-                      //           });
-                      //         },
-                      //       )
-                      //     ],
-                      //   ),
-                      // )
+                      Container(
+                          width: 125.0,
+                          height: 40.0,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25.0),
+                              color: Color(0xFFEDFEE5)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              IconButton(
+                                icon: Icon(Icons.remove_circle_outline,
+                                    color: Color(0xFF5CB238)),
+                                onPressed: () {
+                                  setState(() {
+                                    if (foodqtn == 1) {
+                                      foodqtn = 1;
+                                    } else {
+                                      foodqtn = foodqtn - 1;
+                                    }
+                                  });
+                                },
+                              ),
+                              Text(
+                                foodqtn.toString(),
+                                style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    fontSize: 20.0,
+                                    color: Color(0xFF5CB238)),
+                              ),
+                              IconButton(
+                                icon: Icon(Icons.add_circle,
+                                    color: Color(0xFF5AC035)),
+                                onPressed: () {
+                                  setState(() {
+                                    foodqtn = foodqtn + 1;
+                                  });
+                                },
+                              )
+                            ],
+                          ))
                     ]),
                 SizedBox(height: 15.0),
                 Text('About the food',
@@ -206,7 +209,9 @@ class _DetailsPageState extends State<DetailsPage> {
                         ),
                         SizedBox(width: 10.0),
                         Text(
-                          'Ugx ' + nformat.format(int.parse(widget.foodPrice)),
+                          'Ugx ' +
+                              nformat.format(
+                                  (int.parse(widget.foodPrice)) * foodqtn),
                           style: TextStyle(
                               fontFamily: 'Montserrat',
                               fontSize: 18.0,

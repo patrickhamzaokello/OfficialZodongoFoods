@@ -372,21 +372,16 @@ class _MyHomePageState extends State<MyHomePage> {
         return Padding(
           padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
           child: InkWell(
-            onTap: () async {
-              final result = await Navigator.of(context).push(MaterialPageRoute(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => DetailsPage(
                         heroTag: item.imagepath,
                         foodName: item.name,
                         foodPrice: item.price,
                         foodDescription: item.decription,
-                        foodqtn: item.quantity,
                       )));
 
-              setState(() {
-                item.quantity = result;
-
-                // print("quantity: ${item.quantity}");
-              });
+              setState(() {});
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -449,49 +444,56 @@ class _MyHomePageState extends State<MyHomePage> {
       Food(
         name: 'Chicken Zinger',
         price: '5000',
-        decription: 'Zinge that meal and rock your pallete',
+        decription:
+            'Zinge that meal and rock Favourite Chicken Plaza Meant for youyour pallete.Favourite Chicken Plaza Meant for you',
         imagepath: 'assets/plate1.png',
         quantity: 1,
       ),
       Food(
         name: 'Chicken',
         price: '2000',
-        decription: 'Favourite Chicken Plaza Meant for you',
+        decription:
+            'Favourite Chicken Plaza.Favourite Chicken Plaza Meant for you Meant for you.Favourite Chicken Plaza Meant for you',
         imagepath: 'assets/plate2.png',
         quantity: 1,
       ),
       Food(
         name: 'Rice',
         price: '5000',
-        decription: 'The assorted Rice content meant for you',
+        decription:
+            'Favourite Chicken Plaza.Favourite Chicken Plaza Meant for you Meant for you.The assorted Rice content meant for you',
         imagepath: 'assets/plate3.png',
         quantity: 1,
       ),
       Food(
         name: 'Beef',
         price: '5000',
-        decription: 'The Best Beef Burger in the Land',
+        decription:
+            'The Best Beef.Favourite Chicken.Favourite Chicken Plaza Meant for you Plaza Meant for you Burger in the Land',
         imagepath: 'assets/plate4.png',
         quantity: 1,
       ),
       Food(
         name: 'Sausage ',
         price: '5000',
-        decription: 'checkout our sauage',
+        decription:
+            'checkout our.Favourite Chicken.Favourite Chicken Plaza Meant for you Plaza Meant for you sauage',
         imagepath: 'assets/saucesage.png',
         quantity: 1,
       ),
       Food(
         name: 'Deck',
         price: '5000',
-        decription: 'Where all the local foods meet and dine',
+        decription:
+            'Where .Favourite Chicken Plaza Meant for youall,Favourite Chicken Plaza Meant for you the local foods meet and dine',
         imagepath: 'assets/plate5.png',
         quantity: 1,
       ),
       Food(
         name: 'Mac',
         price: '5000',
-        decription: 'Favourite Mac Food meant for you',
+        decription:
+            'Favourite.Favourite Chicken Plaza ,Favourite Chicken Plaza Meant for youMeant for you Mac Food meant for you',
         imagepath: 'assets/plate6.png',
         quantity: 1,
       ),

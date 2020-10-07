@@ -1,7 +1,7 @@
 class Food {
   final String foodid;
   final String name;
-  final String price;
+  String price;
   final String decription;
   final String imagepath;
   int quantity;
