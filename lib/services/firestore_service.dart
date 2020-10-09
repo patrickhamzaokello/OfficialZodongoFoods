@@ -12,16 +12,13 @@ class FirestoreService {
 
     var time = (Timestamp.now()).toString();
 
-    for (var i = 0; i < food.length; i++) {
-      pk = _db
-          .collection('FoodCart')
-          .doc('0777676206')
-          .collection("sedrick")
-          .doc(time)
-          .collection("order")
-          .doc(food[i].name)
-          .set(food[i].toMap());
-    }
+    pk = _db
+        .collection('ZodongoCart')
+        .doc()
+        .collection("Orders")
+        .doc()
+        .set(food[0].toMap());
+
     return pk;
   }
 }
