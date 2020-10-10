@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutterloginui/models/brew.dart';
 
 class DatabaseService {
   final String uid;
@@ -16,7 +17,19 @@ class DatabaseService {
     });
   }
 
-  Stream<QuerySnapshot> get brews {
-    return brewCollection.snapshots();
+  // brew list from snapshot
+  List<Brew> _brewListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return Brew(
+        name: doc.data()['name'] ?? '',
+        phonenumber: doc.data()['phone'] ?? '',
+        email: doc.data()['email'],
+      );
+    }).toList();
+  }
+
+  //get brews stream
+  Stream<List<Brew>> get userinfo {
+    return brewCollection.snapshots().map(_brewListFromSnapshot);
   }
 }
