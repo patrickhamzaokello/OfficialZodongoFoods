@@ -15,8 +15,8 @@ class BrewTile extends StatelessWidget {
             radius: 25.0,
             backgroundColor: Colors.brown,
           ),
-          title: Text("Phone ${brew.name}"),
-          subtitle: Text("Email ${brew.email}"),
+          title: Text("${brew.name}"),
+          subtitle: Text("${brew.email}"),
         ),
       ),
     );

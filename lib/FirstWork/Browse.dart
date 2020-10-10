@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterloginui/AboutUs.dart';
+import 'package:flutterloginui/Search.dart';
+import 'package:flutterloginui/UserAccount.dart';
+import 'package:flutterloginui/detailPage.dart';
+import 'package:flutterloginui/foodObject.dart';
+import 'package:flutterloginui/mycart.dart';
 import 'package:flutterloginui/popus/confirmation.dart';
-import 'detailPage.dart';
-import 'foodObject.dart';
-import 'AboutUs.dart';
-import 'Search.dart';
-import "mycart.dart";
-import 'UserAccount.dart';
 import 'package:intl/intl.dart';
 
 var numformat = NumberFormat("#,##0", "en_US");
@@ -194,7 +194,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
               icon: Icon(
-                Icons.help,
+                Icons.bookmark_border,
                 color: Colors.white,
               ),
             ),

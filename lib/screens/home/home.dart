@@ -34,12 +34,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<Food> _dishes = List<Food>();
+  List<Food> _favdishes = List<Food>();
 
   List<Food> _cartList = List<Food>();
 
   @override
   void initState() {
     super.initState();
+    _populateFavouriteDishes();
     _populateDishes();
   }
 
@@ -134,35 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
           SizedBox(height: 7.0),
           Container(
             height: 250.0,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                _buildListItem(
-                  'assets/burger.png',
-                  'Beef Burger',
-                  '7000',
-                  'This Burger home-cooked food is low salt and low oil with balanced nutrition, selected from high-quality ingredients. This delicious food maybe your best healthy choice.',
-                ),
-                _buildListItem(
-                  'assets/images/plate6.png',
-                  'BBQ  Plate',
-                  '5500',
-                  'This light home-cooked food is low salt and low oil with balanced nutrition, selected from high-quality ingredients. This delicious food maybe your best healthy choice.',
-                ),
-                _buildListItem(
-                  'assets/images/plate3.png',
-                  'Vegan Breakfast',
-                  '8000',
-                  'This light home-cooked food is low salt and low oil with balanced nutrition, selected from high-quality ingredients. This delicious food maybe your best healthy choice.',
-                ),
-                _buildListItem(
-                  'assets/images/plate2.png',
-                  'Protein Salad',
-                  '7500',
-                  'This light home-cooked food is low salt and low oil with balanced nutrition, selected from high-quality ingredients. This delicious food maybe your best healthy choice.',
-                ),
-              ],
-            ),
+            child: _buildFavouriteFoods(),
           ),
           SizedBox(height: 20.0),
           Padding(
@@ -173,7 +147,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       fontWeight: FontWeight.w600,
                       fontSize: 17.0))),
           SizedBox(height: 20.0),
-          _buildListView(),
+          _buildFoodMenuList(),
         ],
       ),
       bottomNavigationBar: Container(
@@ -194,7 +168,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
               icon: Icon(
-                Icons.bookmark_border,
+                Icons.help,
                 color: Colors.white,
               ),
             ),
@@ -225,140 +199,184 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget _buildListItem(
-    String imgPath,
-    String foodName,
-    String price,
-    String description,
-  ) {
-    return InkWell(
-      onTap: () {
-        Navigator.of(context).push(
-          (MaterialPageRoute(
-            builder: (context) => DetailsPage(
-              heroTag: imgPath,
-              foodName: foodName,
-              foodPrice: price,
-              foodDescription: description,
-            ),
-          )),
-        );
-      },
-      child: Padding(
-        padding: EdgeInsets.only(left: 20.0, top: 10.0, bottom: 4.0),
-        child: Container(
-          height: 200.0,
-          width: 200.0,
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10.0),
-              boxShadow: [
-                BoxShadow(
-                    blurRadius: 6.0,
-                    color: Colors.grey.withOpacity(0.2),
-                    spreadRadius: 5.0)
-              ]),
-          child: Stack(
-            children: <Widget>[
-              Container(
-                  height: 175.0,
-                  decoration: BoxDecoration(
+  ListView _buildFavouriteFoods() {
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: _favdishes.length,
+      itemBuilder: (context, index) {
+        var item = _favdishes[index];
+        return InkWell(
+          onTap: () {
+            Navigator.of(context).push(
+              (MaterialPageRoute(
+                builder: (context) => DetailsPage(
+                  heroTag: item.imagepath,
+                  foodName: item.name,
+                  foodPrice: item.price,
+                  foodDescription: item.price,
+                ),
+              )),
+            );
+          },
+          child: Padding(
+            padding: EdgeInsets.only(left: 20.0, top: 10.0, bottom: 4.0),
+            child: Container(
+              height: 200.0,
+              width: 200.0,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10.0),
+                  boxShadow: [
+                    BoxShadow(
+                        blurRadius: 6.0,
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: 5.0)
+                  ]),
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    height: 175.0,
+                    decoration: BoxDecoration(
                       gradient: LinearGradient(
                           colors: [Colors.white, Color(0xFFACBEA3)],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight),
                       borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10.0),
-                          topRight: Radius.circular(10.0)))),
-              Hero(
-                  tag: imgPath,
-                  child: Container(
-                    height: 175.0,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage(imgPath), fit: BoxFit.contain),
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10.0),
-                            topRight: Radius.circular(10.0))),
-                  )),
-              Positioned(
-                  top: 160.0,
-                  right: 20.0,
-                  child: Material(
+                        topLeft: Radius.circular(10.0),
+                        topRight: Radius.circular(10.0),
+                      ),
+                    ),
+                  ),
+                  Hero(
+                      tag: item.imagepath,
+                      child: Container(
+                        height: 175.0,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(item.imagepath),
+                                fit: BoxFit.contain),
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10.0),
+                                topRight: Radius.circular(10.0))),
+                      )),
+                  Positioned(
+                    top: 160.0,
+                    right: 20.0,
+                    child: Material(
                       elevation: 2.0,
                       borderRadius: BorderRadius.circular(15.0),
                       child: Container(
                         height: 30.0,
                         width: 30.0,
                         child: Center(
-                            child: Icon(Icons.favorite,
-                                color: Colors.red, size: 17.0)),
+                          child: Icon(Icons.favorite,
+                              color: Colors.green, size: 17.0),
+                        ),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15.0),
                             color: Colors.white),
-                      ))),
-              Positioned(
-                  top: 190.0,
-                  left: 10.0,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(foodName,
-                          style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black,
-                              fontSize: 14.0)),
-                      SizedBox(height: 3.0),
-                      Container(
-                          width: 175.0,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Row(
-                                children: <Widget>[
-                                  Text(
-                                    '4.9',
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 190.0,
+                    left: 10.0,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(item.name,
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black,
+                                fontSize: 14.0)),
+                        SizedBox(height: 3.0),
+                        Container(
+                            width: 175.0,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Row(
+                                  children: <Widget>[
+                                    Text(
+                                      '4.9',
+                                      style: TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          color: Colors.grey,
+                                          fontSize: 12.0),
+                                    ),
+                                    SizedBox(width: 3.0),
+                                    Icon(Icons.star,
+                                        color: Colors.green, size: 14.0),
+                                    Icon(Icons.star,
+                                        color: Colors.green, size: 14.0),
+                                    Icon(Icons.star,
+                                        color: Colors.green, size: 14.0),
+                                    Icon(Icons.star,
+                                        color: Colors.green, size: 14.0),
+                                    Icon(Icons.star,
+                                        color: Colors.green, size: 14.0),
+                                  ],
+                                ),
+                                Text(
+                                    'Ugx ' +
+                                        numformat.format(
+                                          int.parse(item.price),
+                                        ),
                                     style: TextStyle(
                                         fontFamily: 'Montserrat',
-                                        color: Colors.grey,
-                                        fontSize: 12.0),
-                                  ),
-                                  SizedBox(width: 3.0),
-                                  Icon(Icons.star,
-                                      color: Colors.green, size: 14.0),
-                                  Icon(Icons.star,
-                                      color: Colors.green, size: 14.0),
-                                  Icon(Icons.star,
-                                      color: Colors.green, size: 14.0),
-                                  Icon(Icons.star,
-                                      color: Colors.green, size: 14.0),
-                                  Icon(Icons.star,
-                                      color: Colors.green, size: 14.0),
-                                ],
-                              ),
-                              Text(
-                                  'Ugx ' +
-                                      numformat.format(
-                                        int.parse(price),
-                                      ),
-                                  style: TextStyle(
-                                      fontFamily: 'Montserrat',
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.black,
-                                      fontSize: 13.0)),
-                            ],
-                          ))
-                    ],
-                  ))
-            ],
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black,
+                                        fontSize: 13.0)),
+                              ],
+                            ))
+                      ],
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        if (!_cartList.contains(item)) {
+                          _cartList.add(item);
+                        } else {
+                          _cartList.remove(item);
+                        }
+                      });
+                    },
+                    child: Material(
+                      elevation: 2.0,
+                      borderRadius: BorderRadius.circular(15.0),
+                      child: Container(
+                        height: 30.0,
+                        width: 30.0,
+                        child: Center(
+                          child: (!_cartList.contains(item))
+                              ? Icon(
+                                  Icons.add_circle,
+                                  color: Colors.amber[400],
+                                  // size: 17.0,
+                                )
+                              : Icon(
+                                  Icons.remove_circle,
+                                  color: Colors.red,
+                                ),
+                        ),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15.0),
+                            color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
-  ListView _buildListView() {
+  ListView _buildFoodMenuList() {
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -387,30 +405,31 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Container(
-                    child: Row(children: [
-                  Hero(
-                      tag: item.imagepath,
-                      child: Image(
-                          image: AssetImage(item.imagepath),
-                          fit: BoxFit.cover,
-                          height: 75.0,
-                          width: 75.0)),
-                  SizedBox(width: 10.0),
-                  Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(item.name,
-                            style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.bold)),
-                        Text('UGX ' + numformat.format(int.parse(item.price)),
-                            style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontSize: 14.0,
-                                color: Colors.grey))
-                      ])
-                ])),
+                  child: Row(children: [
+                    Hero(
+                        tag: item.imagepath,
+                        child: Image(
+                            image: AssetImage(item.imagepath),
+                            fit: BoxFit.cover,
+                            height: 75.0,
+                            width: 75.0)),
+                    SizedBox(width: 10.0),
+                    Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(item.name,
+                              style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.bold)),
+                          Text('UGX ' + numformat.format(int.parse(item.price)),
+                              style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 14.0,
+                                  color: Colors.grey))
+                        ])
+                  ]),
+                ),
                 GestureDetector(
                   onTap: () {
                     setState(() {
@@ -421,15 +440,29 @@ class _MyHomePageState extends State<MyHomePage> {
                       }
                     });
                   },
-                  child: (!_cartList.contains(item))
-                      ? Icon(
-                          Icons.add_circle,
-                          color: Colors.green,
-                        )
-                      : Icon(
-                          Icons.remove_circle,
-                          color: Colors.red,
-                        ),
+                  child: Material(
+                    elevation: 2.0,
+                    borderRadius: BorderRadius.circular(15.0),
+                    child: Container(
+                      height: 30.0,
+                      width: 30.0,
+                      child: Center(
+                        child: (!_cartList.contains(item))
+                            ? Icon(
+                                Icons.add_circle,
+                                color: Colors.amber[400],
+                                // size: 17.0,
+                              )
+                            : Icon(
+                                Icons.remove_circle,
+                                color: Colors.red,
+                              ),
+                      ),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.0),
+                          color: Colors.white),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -437,6 +470,55 @@ class _MyHomePageState extends State<MyHomePage> {
         );
       },
     );
+  }
+
+  void _populateFavouriteDishes() {
+    var list = <Food>[
+      Food(
+        name: 'Tyeng Gweno',
+        price: '5000',
+        decription:
+            'Zinge that meal and rock Favourite Chicken Plaza Meant for youyour pallete.Favourite Chicken Plaza Meant for you',
+        imagepath: 'assets/burger.png',
+        quantity: 1,
+      ),
+      Food(
+        name: 'Molokony',
+        price: '2000',
+        decription:
+            'Favourite Chicken Plaza.Favourite Chicken Plaza Meant for you Meant for you.Favourite Chicken Plaza Meant for you',
+        imagepath: 'assets/images/plate6.png',
+        quantity: 1,
+      ),
+      Food(
+        name: 'Zodongo Meal',
+        price: '2000',
+        decription:
+            'Favourite Chicken Plaza.Favourite Chicken Plaza Meant for you Meant for you.Favourite Chicken Plaza Meant for you',
+        imagepath: 'assets/images/plate3.png',
+        quantity: 1,
+      ),
+      Food(
+        name: 'Patrick Special',
+        price: '2000',
+        decription:
+            'Favourite Chicken Plaza.Favourite Chicken Plaza Meant for you Meant for you.Favourite Chicken Plaza Meant for you',
+        imagepath: 'assets/images/plate2.png',
+        quantity: 1,
+      ),
+      Food(
+        name: 'Sedrick Special',
+        price: '2000',
+        decription:
+            'Favourite Chicken Plaza.Favourite Chicken Plaza Meant for you Meant for you.Favourite Chicken Plaza Meant for you',
+        imagepath: 'assets/images/plate1.png',
+        quantity: 1,
+      ),
+    ];
+
+    setState(() {
+      _favdishes = list;
+    });
   }
 
   void _populateDishes() {
