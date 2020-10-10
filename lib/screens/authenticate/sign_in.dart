@@ -44,6 +44,22 @@ class _SignInState extends State<SignIn> {
                     child: ListView(
                       children: <Widget>[
                         SizedBox(height: 20.0),
+                        Container(
+                          child: Center(
+                            child:
+                                Image.asset("assets/images/zodongologo.jpeg"),
+                          ),
+                        ),
+                        AnimatedContainer(
+                          curve: Curves.fastLinearToSlowEaseIn,
+                          duration: Duration(milliseconds: 1000),
+                          padding: EdgeInsets.symmetric(vertical: 20),
+                          child: Text(
+                            "Sign In to Continue",
+                            style: TextStyle(
+                                color: Colors.grey[400], fontSize: 20),
+                          ),
+                        ),
                         TextFormField(
                           decoration: textInputDecoration.copyWith(
                               hintText: 'Email',
