@@ -30,7 +30,7 @@ class _CartState extends State<Cart> {
     }
     bill = total;
 
-    final productProvider = Provider.of<ProductProvider>(context);
+    // final productProvider = Provider.of<ProductProvider>(context);
 
     return Scaffold(
       backgroundColor: Color(0xFF5AC035),
@@ -149,7 +149,7 @@ class _CartState extends State<Cart> {
                         if (result.isNotEmpty &&
                             result[0].rawAddress.isNotEmpty) {
                           // print('connected');
-                          productProvider.saveProduct(_cart);
+                          // productProvider.saveProduct(_cart);
                           showDialog(
                             context: context,
                             builder: (BuildContext context) => CustomDialog(
@@ -250,49 +250,65 @@ class _CartState extends State<Cart> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Container(
-                    child: Row(children: [
-                  Hero(
-                      tag: item.imagepath,
-                      child: Image(
-                          image: AssetImage(item.imagepath),
-                          fit: BoxFit.cover,
-                          height: 75.0,
-                          width: 75.0)),
-                  SizedBox(width: 10.0),
-                  Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(item.name,
-                            style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.bold)),
-                        Text('Ugx ${item.price}',
-                            style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontSize: 13.0,
-                                color: Colors.grey)),
-                        Text('Qtn: ${item.quantity}',
-                            style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontSize: 13.0,
-                                color: Colors.grey))
-                      ])
-                ])),
-                IconButton(
-                    icon: Icon(
-                      Icons.remove_circle,
-                      color: Colors.red,
+                  child: Row(
+                    children: [
+                      Hero(
+                          tag: item.imagepath,
+                          child: Image(
+                              image: AssetImage(item.imagepath),
+                              fit: BoxFit.cover,
+                              height: 75.0,
+                              width: 75.0)),
+                      SizedBox(width: 10.0),
+                      Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(item.name,
+                                style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.bold)),
+                            Text('Ugx ${item.price}',
+                                style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    fontSize: 13.0,
+                                    color: Colors.grey)),
+                            Text('Qtn: ${item.quantity}',
+                                style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    fontSize: 13.0,
+                                    color: Colors.grey))
+                          ])
+                    ],
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      var newbill = bill - (int.parse(item.price));
+                      bill = newbill;
+                      _cart.remove(item);
+                      print("remained $bill");
+                    });
+                  },
+                  child: Material(
+                    elevation: 2.0,
+                    borderRadius: BorderRadius.circular(15.0),
+                    child: Container(
+                      height: 30.0,
+                      width: 30.0,
+                      child: Center(
+                        child: Icon(
+                          Icons.remove_circle,
+                          color: Colors.red,
+                        ),
+                      ),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.0),
+                          color: Colors.white),
                     ),
-                    color: Colors.red,
-                    onPressed: () {
-                      setState(() {
-                        var newbill = bill - (int.parse(item.price));
-                        bill = newbill;
-                        _cart.remove(item);
-                        print("remained $bill");
-                      });
-                    })
+                  ),
+                ),
               ],
             ),
           ),
