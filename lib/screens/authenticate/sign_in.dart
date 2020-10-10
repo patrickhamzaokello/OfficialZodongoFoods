@@ -43,8 +43,9 @@ class _SignInState extends State<SignIn> {
                     key: _formKey,
                     child: ListView(
                       children: <Widget>[
-                        SizedBox(height: 20.0),
+                        SizedBox(height: 10.0),
                         Container(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
                           child: Center(
                             child:
                                 Image.asset("assets/images/zodongologo.jpeg"),
@@ -60,6 +61,12 @@ class _SignInState extends State<SignIn> {
                                 color: Colors.grey[400], fontSize: 20),
                           ),
                         ),
+                        Text(
+                          error,
+                          style: TextStyle(color: Colors.red, fontSize: 14.0),
+                        ),
+                        SizedBox(height: 5.0),
+
                         TextFormField(
                           decoration: textInputDecoration.copyWith(
                               hintText: 'Email',
@@ -100,7 +107,7 @@ class _SignInState extends State<SignIn> {
                                   if (result == null) {
                                     setState(() {
                                       error =
-                                          'could not sign in with those credentials';
+                                          'sign in failed with those credentials, check your network connection';
                                       loading = false;
                                     });
                                   }
@@ -146,11 +153,6 @@ class _SignInState extends State<SignIn> {
                         //     }
                         //   },
                         // ),
-                        SizedBox(height: 12.0),
-                        Text(
-                          error,
-                          style: TextStyle(color: Colors.red, fontSize: 14.0),
-                        ),
                       ],
                     ),
                   )),
