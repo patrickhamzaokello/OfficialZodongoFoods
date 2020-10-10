@@ -29,7 +29,7 @@ class _SignInState extends State<SignIn> {
         : Scaffold(
             // backgroundColor: Colors.white[100],
             appBar: AppBar(
-              backgroundColor: Colors.green[400],
+              backgroundColor: Color(0xFF5AC035),
               elevation: 0.0,
               title: Text('Zodongo Foods'),
             ),
@@ -44,32 +44,41 @@ class _SignInState extends State<SignIn> {
                     child: ListView(
                       children: <Widget>[
                         SizedBox(height: 10.0),
-                        Container(
+                        AnimatedContainer(
+                          curve: Curves.fastLinearToSlowEaseIn,
+                          duration: Duration(milliseconds: 1000),
                           padding: EdgeInsets.symmetric(horizontal: 20),
                           child: Center(
                             child:
                                 Image.asset("assets/images/zodongologo.jpeg"),
                           ),
                         ),
+                        SizedBox(height: 10.0),
+
                         AnimatedContainer(
                           curve: Curves.fastLinearToSlowEaseIn,
                           duration: Duration(milliseconds: 1000),
-                          padding: EdgeInsets.symmetric(vertical: 20),
-                          child: Text(
-                            "Sign In to Continue",
-                            style: TextStyle(
-                                color: Colors.grey[400], fontSize: 20),
+                          child: Center(
+                            child: Text(
+                              "Sign In to Continue / Create an Account",
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 15.0),
+                            ),
                           ),
                         ),
-                        Text(
-                          error,
-                          style: TextStyle(color: Colors.red, fontSize: 14.0),
+
+                        Container(
+                          child: Center(
+                            child: Text(error,
+                                style: TextStyle(
+                                    color: Colors.red, fontSize: 14.0)),
+                          ),
                         ),
-                        SizedBox(height: 5.0),
 
                         TextFormField(
                           decoration: textInputDecoration.copyWith(
                               hintText: 'Email',
+                              labelText: 'Email:',
                               contentPadding: EdgeInsets.symmetric(
                                   vertical: 10, horizontal: 10)),
                           validator: (val) =>
@@ -81,9 +90,11 @@ class _SignInState extends State<SignIn> {
                         SizedBox(height: 20.0),
                         TextFormField(
                           decoration: textInputDecoration.copyWith(
-                              hintText: 'Password',
-                              contentPadding: EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 10)),
+                            hintText: 'Password',
+                            labelText: 'Password:',
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 10),
+                          ),
                           obscureText: true,
                           validator: (val) => val.length < 6
                               ? 'Enter a password 6+ chars long'
