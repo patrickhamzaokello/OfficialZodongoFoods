@@ -4,7 +4,7 @@ import 'package:flutterloginui/AboutUs.dart';
 import 'package:flutterloginui/Search.dart';
 import 'package:flutterloginui/UserAccount.dart';
 import 'package:flutterloginui/detailPage.dart';
-import 'package:flutterloginui/foodObject.dart';
+import 'package:flutterloginui/models/foodObject.dart';
 import 'package:flutterloginui/mycart.dart';
 import 'package:flutterloginui/popus/confirmation.dart';
 import 'package:intl/intl.dart';

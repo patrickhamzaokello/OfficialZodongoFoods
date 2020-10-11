@@ -58,6 +58,7 @@ class _SignInState extends State<SignIn> {
                         AnimatedContainer(
                           curve: Curves.fastLinearToSlowEaseIn,
                           duration: Duration(milliseconds: 1000),
+                          padding: EdgeInsets.symmetric(horizontal: 20),
                           child: Center(
                             child: Text(
                               "Sign In to Continue / Create an Account",
@@ -84,7 +85,7 @@ class _SignInState extends State<SignIn> {
                           validator: (val) =>
                               val.isEmpty ? 'Enter an Email' : null,
                           onChanged: (val) {
-                            setState(() => email = val);
+                            setState(() => email = val.trim());
                           },
                         ),
                         SizedBox(height: 20.0),
@@ -100,7 +101,7 @@ class _SignInState extends State<SignIn> {
                               ? 'Enter a password 6+ chars long'
                               : null,
                           onChanged: (val) {
-                            setState(() => password = val);
+                            setState(() => password = val.trim());
                           },
                         ),
                         SizedBox(height: 20.0),

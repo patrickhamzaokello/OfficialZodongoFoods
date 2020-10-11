@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterloginui/foodObject.dart';
+import 'package:flutterloginui/models/foodObject.dart';
 import 'package:flutterloginui/services/firestore_service.dart';
 import 'package:uuid/uuid.dart';
 

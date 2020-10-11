@@ -85,7 +85,7 @@ class _RegisterState extends State<Register> {
                         validator: (val) =>
                             val.isEmpty ? 'Enter Full Name' : null,
                         onChanged: (val) {
-                          setState(() => fullname = val);
+                          setState(() => fullname = val.trim());
                         },
                       ),
                       SizedBox(height: 20.0),
@@ -99,7 +99,7 @@ class _RegisterState extends State<Register> {
                         validator: (val) =>
                             val.isEmpty ? 'Enter Phone Number' : null,
                         onChanged: (val) {
-                          setState(() => phonenumber = val);
+                          setState(() => phonenumber = val.trim());
                         },
                       ),
                       SizedBox(height: 20.0),
@@ -113,7 +113,7 @@ class _RegisterState extends State<Register> {
                         validator: (val) =>
                             val.isEmpty ? 'Enter an Email' : null,
                         onChanged: (val) {
-                          setState(() => email = val);
+                          setState(() => email = val.trim());
                         },
                       ),
                       SizedBox(height: 20.0),
@@ -129,7 +129,7 @@ class _RegisterState extends State<Register> {
                             ? 'Enter a password 6+ chars long'
                             : null,
                         onChanged: (val) {
-                          setState(() => password = val);
+                          setState(() => password = val.trim());
                         },
                       ),
                       SizedBox(height: 20.0),

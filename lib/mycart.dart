@@ -3,7 +3,7 @@ import 'package:flutterloginui/CartFoodDetail.dart';
 import 'package:flutterloginui/popus/confirmation.dart';
 import 'package:flutterloginui/providers/products_provider.dart';
 import 'package:provider/provider.dart';
-import 'foodObject.dart';
+import 'models/foodObject.dart';
 import 'dart:io';
 
 int bill = 0;
