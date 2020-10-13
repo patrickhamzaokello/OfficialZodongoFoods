@@ -25,7 +25,7 @@ class _CartState extends State<Cart> {
   Widget build(BuildContext context) {
     var total = 0;
     for (var i = 0; i < _cart.length; i++) {
-      total = total + int.parse(_cart[i].price);
+      total = total + int.parse(_cart[i].pricechange);
       print("totalprice $total");
     }
     bill = total;
@@ -236,12 +236,19 @@ class _CartState extends State<Cart> {
                         foodPrice: item.price,
                         foodDescription: item.decription,
                         foodqtn: item.quantity,
+                        changeprice: item.pricechange,
+                        changeqtn: item.qtnchange,
                       )));
 
               setState(() {
-                item.quantity = result;
+                // item.quantity = result;
 
-                item.price = ((int.parse(item.price)) * result).toString();
+                // item.price = ((int.parse(item.price)) * result).toString();
+
+                item.qtnchange = result;
+
+                item.pricechange =
+                    ((int.parse(item.price)) * result).toString();
 
                 print("quantity: ${item.price}");
               });
@@ -268,12 +275,12 @@ class _CartState extends State<Cart> {
                                     fontFamily: 'Montserrat',
                                     fontSize: 14.0,
                                     fontWeight: FontWeight.bold)),
-                            Text('Ugx ${item.price}',
+                            Text('Ugx ${item.pricechange}',
                                 style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 13.0,
                                     color: Colors.grey)),
-                            Text('Qtn: ${item.quantity}',
+                            Text('Qtn: ${item.qtnchange}',
                                 style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 13.0,

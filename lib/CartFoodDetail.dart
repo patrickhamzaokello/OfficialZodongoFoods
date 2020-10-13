@@ -8,31 +8,46 @@ class CartFoodDetail extends StatefulWidget {
   final foodDescription;
   final foodqtn;
 
+  final changeprice;
+  final changeqtn;
+
   CartFoodDetail(
       {this.heroTag,
       this.foodName,
       this.foodPrice,
       this.foodDescription,
-      this.foodqtn});
+      this.foodqtn,
+      this.changeprice,
+      this.changeqtn});
 
   @override
-  _CartFoodDetailState createState() => _CartFoodDetailState(this.heroTag,
-      this.foodName, this.foodPrice, this.foodDescription, this.foodqtn);
+  _CartFoodDetailState createState() => _CartFoodDetailState(
+      this.heroTag,
+      this.foodName,
+      this.foodPrice,
+      this.foodDescription,
+      this.foodqtn,
+      this.changeprice,
+      this.changeqtn);
 }
 
 class _CartFoodDetailState extends State<CartFoodDetail> {
   _CartFoodDetailState(this.heroTag, this.foodName, this.foodPrice,
-      this.foodDescription, this.foodqtn);
+      this.foodDescription, this.foodqtn, this.changeprice, this.changeqtn);
 
   String heroTag;
   String foodName;
   String foodPrice;
   String foodDescription;
+  String changeprice;
+  int changeqtn;
   int foodqtn;
   @override
   Widget build(BuildContext context) {
     var nformat = NumberFormat("#,##0", "en_US");
     // int qtn = foodqtn;
+
+    // foodqtn = widget.changeqtn;
 
     print("Patrick $foodqtn");
 
@@ -121,7 +136,7 @@ class _CartFoodDetailState extends State<CartFoodDetail> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        'Ugx ' + nformat.format(int.parse(widget.foodPrice)),
+                        'Ugx ' + nformat.format(int.parse(widget.changeprice)),
                         style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
@@ -211,7 +226,7 @@ class _CartFoodDetailState extends State<CartFoodDetail> {
                         Text(
                           'Ugx ' +
                               nformat.format(
-                                  (int.parse(widget.foodPrice)) * foodqtn),
+                                  (int.parse(widget.changeprice)) * foodqtn),
                           style: TextStyle(
                               fontFamily: 'Montserrat',
                               fontSize: 18.0,

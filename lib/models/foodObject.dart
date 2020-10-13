@@ -1,10 +1,13 @@
 class Food {
   final String foodid;
   final String name;
-  String price;
+  final String price;
   final String decription;
   final String imagepath;
-  int quantity;
+  final int quantity;
+
+  String pricechange = '0';
+  int qtnchange = 1;
 
   Food(
       {this.foodid,
@@ -12,7 +15,9 @@ class Food {
       this.price,
       this.decription,
       this.imagepath,
-      this.quantity});
+      this.quantity,
+      this.pricechange,
+      this.qtnchange});
 
   //convert to sent to firestore
 

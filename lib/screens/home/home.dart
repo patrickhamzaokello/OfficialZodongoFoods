@@ -337,8 +337,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     onTap: () {
                       setState(() {
                         if (!_cartList.contains(item)) {
+                          item.pricechange = item.price;
+                          item.qtnchange = item.quantity;
                           _cartList.add(item);
                         } else {
+                          item.pricechange = item.price;
+                          item.qtnchange = item.quantity;
                           _cartList.remove(item);
                         }
                       });
@@ -434,8 +438,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   onTap: () {
                     setState(() {
                       if (!_cartList.contains(item)) {
+                        item.pricechange = item.price;
+                        item.qtnchange = item.quantity;
                         _cartList.add(item);
                       } else {
+                        item.pricechange = item.price;
+                        item.qtnchange = item.quantity;
                         _cartList.remove(item);
                       }
                     });
