@@ -54,7 +54,6 @@ class _SignInState extends State<SignIn> {
                           ),
                         ),
                         SizedBox(height: 10.0),
-
                         AnimatedContainer(
                           curve: Curves.fastLinearToSlowEaseIn,
                           duration: Duration(milliseconds: 1000),
@@ -67,7 +66,6 @@ class _SignInState extends State<SignIn> {
                             ),
                           ),
                         ),
-
                         Container(
                           child: Center(
                             child: Text(error,
@@ -75,7 +73,6 @@ class _SignInState extends State<SignIn> {
                                     color: Colors.red, fontSize: 14.0)),
                           ),
                         ),
-
                         TextFormField(
                           decoration: textInputDecoration.copyWith(
                               hintText: 'Email',
@@ -142,29 +139,6 @@ class _SignInState extends State<SignIn> {
                             )
                           ],
                         ),
-                        // RaisedButton(
-                        //   color: Colors.pink[400],
-                        //   child: Text(
-                        //     'Sign In',
-                        //     style: TextStyle(color: Colors.white),
-                        //   ),
-                        //   onPressed: () async {
-                        //     if (_formKey.currentState.validate()) {
-                        //       setState(() => loading = true);
-
-                        //       dynamic result = await _auth
-                        //           .signInWithEmailAndPassword(email, password);
-
-                        //       if (result == null) {
-                        //         setState(() {
-                        //           error =
-                        //               'could not sign in with those credentials';
-                        //           loading = false;
-                        //         });
-                        //       }
-                        //     }
-                        //   },
-                        // ),
                       ],
                     ),
                   )),

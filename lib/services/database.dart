@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutterloginui/models/brew.dart';
+import 'package:flutterloginui/models/foodObject.dart';
 
 class DatabaseService {
   final String uid;
@@ -15,6 +16,15 @@ class DatabaseService {
       'phone': phone,
       'email': email,
     });
+  }
+
+  //Save Orders to Database
+  Future saveOrders(List<Food> food) async {
+    return await brewCollection
+        .doc(uid)
+        .collection("Orders")
+        .doc()
+        .set(food[0].toMap());
   }
 
   // brew list from snapshot
