@@ -39,6 +39,15 @@ class ProductProvider with ChangeNotifier {
     } else {}
   }
 
+  static List<Map> convertMyCartToMap({List<Food> cartitems}) {
+    List<Map> items = [];
+    cartitems.forEach((Food cartitem) {
+      Map item = cartitem.toMap();
+      items.add(item);
+    });
+    return items;
+  }
+
   saveCardOrders(List<Food> mycart) {
     var newFood = Food(
         name: "Patrick",
@@ -48,7 +57,9 @@ class ProductProvider with ChangeNotifier {
         imagepath: "https://www.google.com/pkasemer",
         foodid: uuid.v1());
 
-    firestoreService.setEntry(newFood).then((result) {
+    firestoreService
+        .setEntry(convertMyCartToMap(cartitems: mycart))
+        .then((result) {
       print("Success!");
     }).catchError((error) {
       print("Error!");
