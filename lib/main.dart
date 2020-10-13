@@ -10,6 +10,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterloginui/models/user.dart';
+import 'package:flutterloginui/providers/products_provider.dart';
 // import 'package:flutterloginui/screens/authenticate/authenticate.dart';
 // import 'package:flutterloginui/providers/products_provider.dart';
 import 'package:flutterloginui/screens/wrapper.dart';
@@ -33,15 +34,18 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<UserObj>.value(
-      value: AuthService().user,
-      child: MaterialApp(
-        theme: ThemeData(fontFamily: "Nunito"),
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: Container(
-            child: Wrapper(),
+    return ChangeNotifierProvider(
+      create: (context) => ProductProvider(),
+      child: StreamProvider<UserObj>.value(
+        value: AuthService().user,
+        child: MaterialApp(
+          theme: ThemeData(fontFamily: "Nunito"),
+          debugShowCheckedModeBanner: false,
+          home: Scaffold(
+            resizeToAvoidBottomInset: false,
+            body: Container(
+              child: Wrapper(),
+            ),
           ),
         ),
       ),

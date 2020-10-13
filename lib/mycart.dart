@@ -22,6 +22,13 @@ class _CartState extends State<Cart> {
   List<Food> _cart;
 
   @override
+  void initState() {
+    final cartProvider = Provider.of<ProductProvider>(context, listen: false);
+    cartProvider.loadAll(null);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var total = 0;
     for (var i = 0; i < _cart.length; i++) {
@@ -30,7 +37,7 @@ class _CartState extends State<Cart> {
     }
     bill = total;
 
-    // final productProvider = Provider.of<ProductProvider>(context);
+    final cartProvider = Provider.of<ProductProvider>(context);
 
     return Scaffold(
       backgroundColor: Color(0xFF5AC035),
@@ -49,22 +56,22 @@ class _CartState extends State<Cart> {
                   },
                 ),
                 Container(
-                    width: 125.0,
+                    // width: 125.0,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        IconButton(
-                          icon: Icon(Icons.filter_list),
-                          color: Colors.white,
-                          onPressed: () {},
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.menu),
-                          color: Colors.white,
-                          onPressed: () {},
-                        )
-                      ],
-                    ))
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    // IconButton(
+                    //   icon: Icon(Icons.calendar_today),
+                    //   color: Colors.white,
+                    //   onPressed: () {},
+                    // ),
+                    IconButton(
+                      icon: Icon(Icons.menu),
+                      color: Colors.white,
+                      onPressed: () {},
+                    )
+                  ],
+                ))
               ],
             ),
           ),
@@ -150,6 +157,7 @@ class _CartState extends State<Cart> {
                             result[0].rawAddress.isNotEmpty) {
                           // print('connected');
                           // productProvider.saveProduct(_cart);
+                          cartProvider.saveCardOrders(_cart);
                           showDialog(
                             context: context,
                             builder: (BuildContext context) => CustomDialog(

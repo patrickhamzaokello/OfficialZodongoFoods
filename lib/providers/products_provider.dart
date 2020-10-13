@@ -13,6 +13,7 @@ class ProductProvider with ChangeNotifier {
   String _imagepath;
   int _quantity;
   var uuid = Uuid();
+  DateTime _date;
 
   //Getters
   String get foodid => _foodid;
@@ -22,28 +23,35 @@ class ProductProvider with ChangeNotifier {
   String get imagepath => _imagepath;
   int get quantity => _quantity;
 
-  changeName(String value) {
+  set changeName(String value) {
     _name = value;
     notifyListeners();
   }
 
-  changePrice(String value) {
+  set changePrice(String value) {
     _price = value;
     notifyListeners();
   }
 
-  saveProduct(List<Food> mycart) {
-    // var newFood = Food(
-    //     name: "pork",
-    //     price: "2500",
-    //     quantity: 1,
-    //     decription: "The best Pork chops ever",
-    //     imagepath: "https://www.google.com/pkasemer",
-    //     foodid: uuid.v4());
-    firestoreService.saveFood(mycart).then((result) {
+  //Functions
+  loadAll(Food food) {
+    if (food != null) {
+    } else {}
+  }
+
+  saveCardOrders(List<Food> mycart) {
+    var newFood = Food(
+        name: "Patrick",
+        price: "2500",
+        quantity: 1,
+        decription: "The best Pork chops ever",
+        imagepath: "https://www.google.com/pkasemer",
+        foodid: uuid.v1());
+
+    firestoreService.setEntry(newFood).then((result) {
       print("Success!");
     }).catchError((error) {
-      // print("Error!");
+      print("Error!");
       return;
     });
   }
