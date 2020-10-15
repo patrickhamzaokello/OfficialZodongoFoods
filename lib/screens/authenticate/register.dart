@@ -35,12 +35,13 @@ class _RegisterState extends State<Register> {
               title: Text('Create Account'),
               actions: <Widget>[
                 FlatButton.icon(
-                    onPressed: () async {
-                      widget.toggleView();
-                    },
-                    icon: Icon(Icons.person),
-                    // color: Colors.white,
-                    label: Text('Sign In'))
+                  onPressed: () async {
+                    widget.toggleView();
+                  },
+                  textColor: Colors.white,
+                  icon: Icon(Icons.person_pin),
+                  label: Text(''),
+                )
               ],
             ),
             body: AnimatedContainer(

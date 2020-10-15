@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutterloginui/models/foodObject.dart';
-import 'package:intl/intl.dart';
 
 class FirestoreService {
   FirebaseFirestore _db = FirebaseFirestore.instance;
@@ -21,12 +20,12 @@ class FirestoreService {
   Future<void> setEntry(List<Map> food) async {
     var options = SetOptions(merge: true);
     var date = DateTime.now();
-    // await inputData();
+    await inputData();
     return food.forEach((element) {
       _db
           .collection('brews')
-          // .doc(useruid)
-          .doc('H61ZrhhcWUeNKCYjxOxEYdXw6B33')
+          .doc(useruid)
+          // .doc('H61ZrhhcWUeNKCYjxOxEYdXw6B33')
           .collection('OrderRecords')
           .doc(date.toString())
           .collection('Order')

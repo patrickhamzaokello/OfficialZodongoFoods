@@ -47,25 +47,25 @@ class _SignInState extends State<SignIn> {
                         AnimatedContainer(
                           curve: Curves.fastLinearToSlowEaseIn,
                           duration: Duration(milliseconds: 1000),
-                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          padding: EdgeInsets.symmetric(horizontal: 50),
                           child: Center(
                             child:
                                 Image.asset("assets/images/zodongologo.jpeg"),
                           ),
                         ),
                         SizedBox(height: 10.0),
-                        AnimatedContainer(
-                          curve: Curves.fastLinearToSlowEaseIn,
-                          duration: Duration(milliseconds: 1000),
-                          padding: EdgeInsets.symmetric(horizontal: 20),
+                        Container(
                           child: Center(
                             child: Text(
-                              "Sign In to Continue / Create an Account",
+                              'Sign In to Continue / Create an Account',
                               style: TextStyle(
-                                  color: Colors.black, fontSize: 15.0),
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Montserrat'),
                             ),
                           ),
                         ),
+                        SizedBox(height: 10.0),
                         Container(
                           child: Center(
                             child: Text(error,
@@ -74,11 +74,14 @@ class _SignInState extends State<SignIn> {
                           ),
                         ),
                         TextFormField(
-                          decoration: textInputDecoration.copyWith(
-                              hintText: 'Email',
-                              labelText: 'Email:',
-                              contentPadding: EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 10)),
+                          decoration: InputDecoration(
+                              labelText: 'EMAIL',
+                              labelStyle: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.green))),
                           validator: (val) =>
                               val.isEmpty ? 'Enter an Email' : null,
                           onChanged: (val) {
@@ -87,12 +90,14 @@ class _SignInState extends State<SignIn> {
                         ),
                         SizedBox(height: 20.0),
                         TextFormField(
-                          decoration: textInputDecoration.copyWith(
-                            hintText: 'Password',
-                            labelText: 'Password:',
-                            contentPadding: EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 10),
-                          ),
+                          decoration: InputDecoration(
+                              labelText: 'PASSWORD',
+                              labelStyle: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.green))),
                           obscureText: true,
                           validator: (val) => val.length < 6
                               ? 'Enter a password 6+ chars long'
@@ -187,13 +192,13 @@ class _OutlineBtnState extends State<OutlineBtn> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          border: Border.all(color: Color(0xFF5AC035), width: 2),
+          border: Border.all(color: Color(0xFF5AC035)),
           borderRadius: BorderRadius.circular(50)),
       padding: EdgeInsets.all(10),
       child: Center(
         child: Text(
           widget.btnText,
-          style: TextStyle(color: Color(0xFFB40284A), fontSize: 16),
+          style: TextStyle(fontWeight: FontWeight.w600),
         ),
       ),
     );

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutterloginui/services/auth.dart';
 
-class AboutUs extends StatefulWidget {
+class UserPage extends StatefulWidget {
   @override
-  _AboutUsState createState() => _AboutUsState();
+  _UserPageState createState() => _UserPageState();
 }
 
-class _AboutUsState extends State<AboutUs> {
+class _UserPageState extends State<UserPage> {
   final String _fullName = "Zodongo Foods";
+  final AuthService _auth = AuthService();
 
   final String _status = "Mobile Food Ordering App";
 
@@ -18,7 +20,7 @@ class _AboutUsState extends State<AboutUs> {
       height: screenSize.height / 2.6,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/mexicanplate.png'),
+          image: AssetImage('assets/images/plate4.png'),
           fit: BoxFit.cover,
         ),
       ),
@@ -75,35 +77,6 @@ class _AboutUsState extends State<AboutUs> {
           fontWeight: FontWeight.w300,
         ),
       ),
-    );
-  }
-
-  Widget _buildStatItem(String label, String count) {
-    TextStyle _statLabelTextStyle = TextStyle(
-      fontFamily: 'Roboto',
-      color: Colors.black,
-      fontSize: 16.0,
-      fontWeight: FontWeight.w200,
-    );
-
-    TextStyle _statCountTextStyle = TextStyle(
-      color: Colors.black54,
-      fontSize: 24.0,
-      fontWeight: FontWeight.bold,
-    );
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text(
-          count,
-          style: _statCountTextStyle,
-        ),
-        Text(
-          label,
-          style: _statLabelTextStyle,
-        ),
-      ],
     );
   }
 
@@ -165,7 +138,9 @@ class _AboutUsState extends State<AboutUs> {
         children: <Widget>[
           Expanded(
             child: InkWell(
-              onTap: () => print("followed"),
+              onTap: () async {
+                await _auth.signOut();
+              },
               child: Container(
                 height: 40.0,
                 decoration: BoxDecoration(
@@ -174,31 +149,10 @@ class _AboutUsState extends State<AboutUs> {
                 ),
                 child: Center(
                   child: Text(
-                    "FOLLOW",
+                    "LOG OUT",
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(width: 10.0),
-          Expanded(
-            child: InkWell(
-              onTap: () => print("Message"),
-              child: Container(
-                height: 40.0,
-                decoration: BoxDecoration(
-                  border: Border.all(),
-                ),
-                child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      "MESSAGE",
-                      style: TextStyle(fontWeight: FontWeight.w600),
                     ),
                   ),
                 ),
@@ -217,7 +171,7 @@ class _AboutUsState extends State<AboutUs> {
       appBar: AppBar(
         backgroundColor: Color(0xFF5AC035),
         elevation: 0.0,
-        title: Text('About Us'),
+        title: Text('Exit Zodongo Foods'),
       ),
       body: Stack(
         children: <Widget>[
@@ -230,7 +184,7 @@ class _AboutUsState extends State<AboutUs> {
                   _buildProfileImage(),
                   _buildFullName(),
                   _buildStatus(context),
-                  _buildBio(context),
+                  // _buildBio(context),
                   _buildSeparator(screenSize),
                   SizedBox(height: 10.0),
                   _buildGetInTouch(context),

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterloginui/AboutUs.dart';
 import 'package:flutterloginui/Search.dart';
-import 'package:flutterloginui/UserAccount.dart';
+import 'package:flutterloginui/UserPage.dart';
 import 'package:flutterloginui/detailPage.dart';
 import 'package:flutterloginui/models/foodObject.dart';
 import 'package:flutterloginui/mycart.dart';
@@ -187,7 +187,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               onPressed: () {
                 Navigator.of(context).push(
-                  (MaterialPageRoute(builder: (context) => UserAccount())),
+                  (MaterialPageRoute(builder: (context) => UserPage())),
                 );
               },
             ),

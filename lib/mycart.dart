@@ -142,75 +142,94 @@ class _CartState extends State<Cart> {
                     ),
                   ),
                 ),
-                Container(
-                  height: 50.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30.0),
-                    color: Color(0xFF5AC035),
-                  ),
-                  child: GestureDetector(
-                    onTap: () async {
-                      try {
-                        final result =
-                            await InternetAddress.lookup('google.com');
-                        if (result.isNotEmpty &&
-                            result[0].rawAddress.isNotEmpty) {
-                          // print('connected');
-                          // productProvider.saveProduct(_cart);
-                          cartProvider.saveCardOrders(_cart);
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) => CustomDialog(
-                              title: "Success",
-                              description:
-                                  "Your Order has been Received! Thank You",
-                              buttonText: "Okay",
+                SizedBox(height: 8.0),
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: InkWell(
+                          onTap: () async {
+                            try {
+                              final result =
+                                  await InternetAddress.lookup('google.com');
+                              if (result.isNotEmpty &&
+                                  result[0].rawAddress.isNotEmpty) {
+                                // print('connected');
+                                // productProvider.saveProduct(_cart);
+                                cartProvider.saveCardOrders(_cart);
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      CustomDialog(
+                                    title: "Success",
+                                    description:
+                                        "Your Order has been Received! Thank You",
+                                    buttonText: "Okay",
+                                  ),
+                                );
+                                _cart.clear();
+                                // bill = 0;
+                                Navigator.of(context).pop(_cart);
+                                // setState(() {});
+                              }
+                            } on SocketException catch (_) {
+                              // print('not connected');
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) => CustomDialog(
+                                  title: "Failed",
+                                  description:
+                                      "Order Failed, No Internet Connection. Please Try again",
+                                  buttonText: "Okay",
+                                ),
+                              );
+                            }
+                          },
+                          child: Container(
+                            height: 40.0,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.pink[400]),
+                              color: Colors.pink[400],
                             ),
-                          );
-                          _cart.clear();
-                          // bill = 0;
-                          Navigator.of(context).pop(_cart);
-                          // setState(() {});
-                        }
-                      } on SocketException catch (_) {
-                        // print('not connected');
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) => CustomDialog(
-                            title: "Failed",
-                            description:
-                                "Order Failed, No Internet Connection. Please Try again",
-                            buttonText: "Okay",
-                          ),
-                        );
-                      }
-                    },
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            'Place',
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontSize: 17.0,
-                              color: Colors.white,
+                            child: Center(
+                              child: Text(
+                                "Submit Order",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
                             ),
                           ),
-                          SizedBox(width: 10.0),
-                          Text(
-                            "Order",
-                            style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontSize: 18.0,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          )
-                        ],
+                        ),
                       ),
-                    ),
+                      SizedBox(width: 10.0),
+                      Expanded(
+                        child: InkWell(
+                          onTap: () =>
+                              {_cart.clear(), Navigator.of(context).pop(_cart)},
+                          child: Container(
+                            height: 40.0,
+                            decoration: BoxDecoration(
+                              border: Border.all(),
+                            ),
+                            child: Center(
+                              child: Padding(
+                                padding: EdgeInsets.all(10.0),
+                                child: Text(
+                                  "Clear Cart",
+                                  style: TextStyle(fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                )
+                ),
               ],
             ),
           )
