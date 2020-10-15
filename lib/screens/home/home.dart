@@ -151,10 +151,8 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       bottomNavigationBar: Container(
-        height: 75.0,
+        height: 50.0,
         decoration: BoxDecoration(
-          // borderRadius: BorderRadius.only(
-          // topLeft: Radius.circular(50.0), topRight: Radius.circular(50.0)),
           color: Color(0xFF5AC035),
         ),
         padding: EdgeInsets.only(left: 40.0, right: 40.0),
@@ -168,7 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
               icon: Icon(
-                Icons.help,
+                Icons.extension,
                 color: Colors.white,
               ),
             ),
