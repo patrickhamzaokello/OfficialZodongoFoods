@@ -41,16 +41,19 @@ class ProductProvider with ChangeNotifier {
 
   static List<Map> convertMyCartToMap({List<Food> cartitems}) {
     List<Map> items = [];
+
     cartitems.forEach((Food cartitem) {
       Map item = cartitem.toMap();
       items.add(item);
     });
+
+    print('items items $items');
     return items;
   }
 
   saveCardOrders(List<Food> mycart) {
     var newFood = Food(
-        name: "Patrick",
+        name: "pkasemer",
         price: "2500",
         quantity: 1,
         decription: "The best Pork chops ever",
@@ -61,8 +64,9 @@ class ProductProvider with ChangeNotifier {
         .setEntry(convertMyCartToMap(cartitems: mycart))
         .then((result) {
       print("Success!");
+      print(convertMyCartToMap(cartitems: mycart));
     }).catchError((error) {
-      print("Error!");
+      print("Error! $error");
       return;
     });
   }
