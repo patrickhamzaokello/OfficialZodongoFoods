@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterloginui/models/foodObject.dart';
 import 'package:flutterloginui/services/firestore_service.dart';
+import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 
 class ProductProvider with ChangeNotifier {
@@ -52,16 +53,18 @@ class ProductProvider with ChangeNotifier {
   }
 
   saveCardOrders(List<Food> mycart) {
-    var newFood = Food(
-        name: "pkasemer",
-        price: "2500",
-        quantity: 1,
-        decription: "The best Pork chops ever",
-        imagepath: "https://www.google.com/pkasemer",
-        foodid: uuid.v1());
+    var datenow = (DateTime.now()).toString();
+    // print(new DateFormat.yMd().add_jm().format(new DateTime.now()));
 
     firestoreService
-        .setEntry(convertMyCartToMap(cartitems: mycart))
+        .saveDate(datenow)
+        .then((value) => print('datesaved'))
+        .catchError((error) {
+      print(error);
+    });
+
+    firestoreService
+        .setEntry(convertMyCartToMap(cartitems: mycart), datenow)
         .then((result) {
       print("Success!");
       print(convertMyCartToMap(cartitems: mycart));

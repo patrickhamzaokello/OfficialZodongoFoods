@@ -17,9 +17,8 @@ class FirestoreService {
   }
 
   //upsert
-  Future<void> setEntry(List<Map> food) async {
+  Future<void> setEntry(List<Map> food, String datenow) async {
     var options = SetOptions(merge: true);
-    var date = DateTime.now();
     await inputData();
     return food.forEach((element) {
       _db
@@ -27,11 +26,22 @@ class FirestoreService {
           .doc(useruid)
           // .doc('H61ZrhhcWUeNKCYjxOxEYdXw6B33')
           .collection('OrderRecords')
-          .doc(date.toString())
+          .doc(datenow)
           .collection('Order')
           .doc(element['name'])
           .set(element, options);
     });
+  }
+
+  Future<void> saveDate(String datenow) async {
+    await inputData();
+    return _db
+        .collection('brews')
+        .doc(useruid)
+        // .doc('H61ZrhhcWUeNKCYjxOxEYdXw6B33')
+        .collection('OrderRecords')
+        .doc(datenow)
+        .set({"date": datenow});
   }
 
   //get food listing from firestore
