@@ -1,22 +1,11 @@
-// import 'package:firebase_core/firebase_core.dart';
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutterloginui/providers/products_provider.dart';
-// import 'package:keyboard_visibility/keyboard_visibility.dart';
-// import 'package:provider/provider.dart';
-// import 'Browse.dart';
-
-// import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterloginui/models/user.dart';
 import 'package:flutterloginui/providers/products_provider.dart';
-// import 'package:flutterloginui/screens/authenticate/authenticate.dart';
-// import 'package:flutterloginui/providers/products_provider.dart';
 import 'package:flutterloginui/screens/wrapper.dart';
 import 'package:flutterloginui/services/auth.dart';
 import 'package:provider/provider.dart';
-// import 'package:provider/provider.dart';
+import 'package:splashscreen/splashscreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,6 +21,49 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(fontFamily: "Nunito"),
+      debugShowCheckedModeBanner: false,
+      home: SplashScreen(
+        //number of seconds the splash screen will show
+        seconds: 7,
+        //Page to show after splash screen
+        navigateAfterSeconds: AfterSplash(),
+        title: new Text(
+          'zodongo Foods',
+          style: new TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontSize: 30.0,
+              fontFamily: "Montserrat-Regular"),
+        ),
+        loadingText: new Text(
+          'Welcome to Zodongo Foods. All your Favourite foods available at your finger tips',
+          style: new TextStyle(
+              fontWeight: FontWeight.w100,
+              color: Colors.white,
+              fontSize: 20.0,
+              fontFamily: "Montserrat-Regular"),
+        ),
+        //Our logo that we have imported in step 2
+        image: new Image.asset('assets/images/mexicanplate.png'),
+        //Splash Screen Background color
+        gradientBackground: LinearGradient(
+            colors: [Colors.greenAccent[700], Colors.greenAccent[700]],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight),
+        backgroundColor: Colors.white,
+        styleTextUnderTheLoader: new TextStyle(),
+        photoSize: 100.0,
+        loaderColor: Colors.white,
+      ),
+    );
+  }
+}
+
+class AfterSplash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -52,28 +84,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-// void main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await Firebase.initializeApp();
-//   runApp(MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-//   // This widget is the root of your application.
-//   @override
-//   Widget build(BuildContext context) {
-//     return ChangeNotifierProvider(
-//       create: (context) => ProductProvider(),
-//       child: MaterialApp(
-//         theme: ThemeData(fontFamily: "Nunito"),
-//         debugShowCheckedModeBanner: false,
-//         home: Scaffold(
-//           resizeToAvoidBottomInset: false,
-//           body: Container(
-//             child: Wrapper(),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
