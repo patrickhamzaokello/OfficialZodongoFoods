@@ -39,6 +39,8 @@ class _MyAppState extends State<MyApp> {
               fontSize: 30.0,
               fontFamily: "Montserrat-Regular"),
         ),
+        styleTextUnderTheLoader: new TextStyle(),
+
         loadingText: new Text(
           'Welcome to Zodongo Foods. All your Favourite foods available at your finger tips',
           style: new TextStyle(
@@ -55,7 +57,6 @@ class _MyAppState extends State<MyApp> {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight),
         backgroundColor: Colors.white,
-        styleTextUnderTheLoader: new TextStyle(),
         photoSize: 100.0,
         loaderColor: Colors.white,
       ),
