@@ -22,9 +22,6 @@ class FirestoreService {
     await inputData();
     return food.forEach((element) {
       _db
-          .collection('brews')
-          .doc(useruid)
-          // .doc('H61ZrhhcWUeNKCYjxOxEYdXw6B33')
           .collection('OrderRecords')
           .doc(datenow)
           .collection('Order')
@@ -36,12 +33,9 @@ class FirestoreService {
   Future<void> saveDate(String datenow) async {
     await inputData();
     return _db
-        .collection('brews')
-        .doc(useruid)
-        // .doc('H61ZrhhcWUeNKCYjxOxEYdXw6B33')
         .collection('OrderRecords')
         .doc(datenow)
-        .set({"date": datenow});
+        .set({"userid": useruid, "date": datenow, "status": "false"});
   }
 
   //get food listing from firestore
