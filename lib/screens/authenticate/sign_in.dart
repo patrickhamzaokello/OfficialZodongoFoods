@@ -32,6 +32,17 @@ class _SignInState extends State<SignIn> {
               backgroundColor: Color(0xFF5AC035),
               elevation: 0.0,
               title: Text('Zodongo Foods'),
+              actions: <Widget>[
+                FlatButton.icon(
+                  onPressed: () async {
+                    widget.toggleView();
+                  },
+                  textColor: Colors.white,
+                  icon: Icon(Icons.person_add),
+                  label: Text('New User'),
+                  color: Colors.green,
+                )
+              ],
             ),
             body: AnimatedContainer(
               curve: Curves.fastLinearToSlowEaseIn,
@@ -53,7 +64,7 @@ class _SignInState extends State<SignIn> {
                                 Image.asset("assets/images/zodongologo.jpeg"),
                           ),
                         ),
-                        SizedBox(height: 10.0),
+                        SizedBox(height: 20.0),
                         Container(
                           child: Center(
                             child: Text(

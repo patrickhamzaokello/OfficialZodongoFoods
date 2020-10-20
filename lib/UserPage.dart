@@ -34,7 +34,7 @@ class _UserPageState extends State<UserPage> {
         height: 140.0,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/zodongologo.jpeg'),
+            image: AssetImage('assets/images/profileimage.jpg'),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.circular(80.0),
@@ -144,8 +144,7 @@ class _UserPageState extends State<UserPage> {
               child: Container(
                 height: 40.0,
                 decoration: BoxDecoration(
-                  border: Border.all(),
-                  color: Color(0xFF404A5C),
+                  color: Colors.green,
                 ),
                 child: Center(
                   child: Text(

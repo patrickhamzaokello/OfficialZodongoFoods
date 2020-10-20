@@ -2,7 +2,7 @@ class Food {
   final String foodid;
   final String name;
   final String price;
-  final String decription;
+  final String description;
   final String imagepath;
   final int quantity;
 
@@ -13,7 +13,7 @@ class Food {
       {this.foodid,
       this.name,
       this.price,
-      this.decription,
+      this.description,
       this.imagepath,
       this.quantity,
       this.pricechange,
@@ -26,7 +26,7 @@ class Food {
       'foodid': foodid,
       'name': name,
       'price': price,
-      'description': decription,
+      'description': description,
       'imagepath': imagepath,
       'quantity': quantity,
     };
@@ -38,7 +38,7 @@ class Food {
     return Food(
         name: json['name'],
         price: json['price'],
-        decription: json['decription'],
+        description: json['description'],
         imagepath: json['imagepath'],
         quantity: json['quantity'],
         foodid: json['foodid']);

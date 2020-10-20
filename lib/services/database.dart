@@ -36,7 +36,7 @@ class DatabaseService {
         foodid: doc.data()['foodid'] ?? '',
         name: doc.data()['name'] ?? '',
         price: doc.data()['price'] ?? '',
-        decription: doc.data()['description'] ?? '',
+        description: doc.data()['description'] ?? '',
         imagepath: doc.data()['imagepath'] ?? '',
         quantity: doc.data()['quantity'] ?? '',
       );

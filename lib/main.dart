@@ -72,7 +72,9 @@ class AfterSplash extends StatelessWidget {
       child: StreamProvider<UserObj>.value(
         value: AuthService().user,
         child: MaterialApp(
-          theme: ThemeData(fontFamily: "Nunito"),
+          theme: ThemeData(
+            fontFamily: "Nunito",
+          ),
           debugShowCheckedModeBanner: false,
           home: Scaffold(
             resizeToAvoidBottomInset: false,

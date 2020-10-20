@@ -3,7 +3,6 @@ import 'package:flutterloginui/models/foodObject.dart';
 import 'package:flutterloginui/mycart.dart';
 import 'package:flutterloginui/popus/confirmation.dart';
 import 'package:flutterloginui/screens/home/brew_list.dart';
-import 'package:flutterloginui/services/auth.dart';
 import 'package:flutterloginui/services/database.dart';
 
 import 'package:provider/provider.dart';

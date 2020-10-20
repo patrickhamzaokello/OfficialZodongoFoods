@@ -39,8 +39,9 @@ class _RegisterState extends State<Register> {
                     widget.toggleView();
                   },
                   textColor: Colors.white,
-                  icon: Icon(Icons.person_pin),
-                  label: Text(''),
+                  icon: Icon(Icons.account_circle),
+                  label: Text('Sign IN'),
+                  color: Colors.green,
                 )
               ],
             ),
@@ -53,29 +54,30 @@ class _RegisterState extends State<Register> {
                   key: _formKey,
                   child: ListView(
                     children: <Widget>[
-                      SizedBox(height: 20.0),
                       AnimatedContainer(
                         curve: Curves.fastLinearToSlowEaseIn,
                         duration: Duration(milliseconds: 1000),
-                        child: Text(
-                          "Zodongo Foods",
-                          style: TextStyle(color: Colors.black, fontSize: 35.0),
+                        padding: EdgeInsets.symmetric(horizontal: 50),
+                        child: Center(
+                          child: Image.asset("assets/images/zodongologo.jpeg"),
                         ),
                       ),
+                      SizedBox(height: 10.0),
+
                       AnimatedContainer(
                         curve: Curves.fastLinearToSlowEaseIn,
                         duration: Duration(milliseconds: 1000),
                         child: Text(
-                          "Create an Account to Order Now!",
+                          "Create an Account to Order Zodongo Foods!",
                           style: TextStyle(color: Colors.black, fontSize: 20.0),
                         ),
                       ),
-                      SizedBox(height: 20.0),
+                      SizedBox(height: 10.0),
                       Text(
                         error,
                         style: TextStyle(color: Colors.red, fontSize: 14.0),
                       ),
-                      SizedBox(height: 20.0),
+                      SizedBox(height: 10.0),
                       TextFormField(
                         decoration: textInputDecoration.copyWith(
                           hintText: 'Full Name',

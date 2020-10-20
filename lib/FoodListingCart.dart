@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterloginui/CartFoodDetail.dart';
+import 'package:flutterloginui/FoodListingCartDetails.dart';
 import 'package:flutterloginui/popus/confirmation.dart';
 import 'package:flutterloginui/providers/products_provider.dart';
 import 'package:load/load.dart';
@@ -9,17 +10,17 @@ import 'dart:io';
 
 int bill = 0;
 
-class Cart extends StatefulWidget {
+class FoodListingCart extends StatefulWidget {
   final List<Food> _cart;
 
-  Cart(this._cart);
+  FoodListingCart(this._cart);
 
   @override
-  _CartState createState() => _CartState(this._cart);
+  _FoodListingCartState createState() => _FoodListingCartState(this._cart);
 }
 
-class _CartState extends State<Cart> {
-  _CartState(this._cart);
+class _FoodListingCartState extends State<FoodListingCart> {
+  _FoodListingCartState(this._cart);
   List<Food> _cart;
 
   @override
@@ -42,7 +43,7 @@ class _CartState extends State<Cart> {
 
     return LoadingProvider(
       child: Scaffold(
-        backgroundColor: Color(0xFF5AC035),
+        backgroundColor: Colors.red[400],
         body: ListView(
           children: <Widget>[
             Padding(
@@ -93,7 +94,7 @@ class _CartState extends State<Cart> {
                           fontWeight: FontWeight.bold,
                           fontSize: 25.0)),
                   SizedBox(width: 10.0),
-                  Text('Order Cart',
+                  Text('Cart',
                       style: TextStyle(
                           fontFamily: 'Montserrat',
                           color: Colors.white,
@@ -107,7 +108,7 @@ class _CartState extends State<Cart> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Total',
+                    'Total (ugx)',
                     style: TextStyle(
                       fontFamily: 'Montserrat',
                       fontSize: 17.0,
@@ -200,8 +201,8 @@ class _CartState extends State<Cart> {
                             child: Container(
                               height: 40.0,
                               decoration: BoxDecoration(
-                                border: Border.all(color: Colors.pink[400]),
-                                color: Colors.pink[400],
+                                border: Border.all(color: Colors.red[400]),
+                                color: Colors.red[400],
                               ),
                               child: Center(
                                 child: Text(
@@ -271,7 +272,7 @@ class _CartState extends State<Cart> {
           child: InkWell(
             onTap: () async {
               final result = await Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => CartFoodDetail(
+                  builder: (context) => FoodListingCartDetails(
                         heroTag: item.imagepath,
                         foodName: item.name,
                         foodPrice: item.price,
@@ -303,7 +304,7 @@ class _CartState extends State<Cart> {
                       Hero(
                           tag: item.imagepath,
                           child: Image(
-                              image: AssetImage(item.imagepath),
+                              image: NetworkImage(item.imagepath),
                               fit: BoxFit.cover,
                               height: 75.0,
                               width: 75.0)),

@@ -39,8 +39,8 @@ class FirestoreService {
   }
 
   //get food listing from firestore
-  Stream<List<Food>> getFood() {
-    return _db.collection('FoodListing').snapshots().map((snapshot) =>
+  Stream<List<Food>> getFoods() {
+    return _db.collection('FoodListings').snapshots().map((snapshot) =>
         snapshot.docs.map((doc) => Food.fromJson(doc.data())).toList());
   }
 

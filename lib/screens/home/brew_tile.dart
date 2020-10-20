@@ -28,7 +28,7 @@ class _BrewTileState extends State<BrewTile> {
                     heroTag: widget.item.imagepath,
                     foodName: widget.item.name,
                     foodPrice: widget.item.price,
-                    foodDescription: widget.item.decription,
+                    foodDescription: widget.item.description,
                   )));
 
           setState(() {});

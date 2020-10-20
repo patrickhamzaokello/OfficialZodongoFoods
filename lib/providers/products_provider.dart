@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterloginui/models/foodObject.dart';
 import 'package:flutterloginui/services/firestore_service.dart';
-import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 
 class ProductProvider with ChangeNotifier {
@@ -10,29 +9,20 @@ class ProductProvider with ChangeNotifier {
   String _foodid;
   String _name;
   String _price;
-  String _decription;
+  String _description;
   String _imagepath;
   int _quantity;
   var uuid = Uuid();
-  DateTime _date;
 
   //Getters
   String get foodid => _foodid;
   String get name => _name;
   String get price => _price;
-  String get decription => _decription;
+  String get description => _description;
   String get imagepath => _imagepath;
   int get quantity => _quantity;
 
-  set changeName(String value) {
-    _name = value;
-    notifyListeners();
-  }
-
-  set changePrice(String value) {
-    _price = value;
-    notifyListeners();
-  }
+  Stream<List<Food>> get foods => firestoreService.getFoods();
 
   //Functions
   loadAll(Food food) {

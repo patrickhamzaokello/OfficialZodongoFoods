@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterloginui/AboutUs.dart';
+import 'package:flutterloginui/FoodListing.dart';
 import 'package:flutterloginui/LocalFoods.dart';
 import 'package:flutterloginui/UserPage.dart';
 import 'package:flutterloginui/detailPage.dart';
@@ -43,6 +44,30 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     _populateFavouriteDishes();
     _populateDishes();
+  }
+
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text(
+      'Index 0: Home',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 1: Business',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 2: School',
+      style: optionStyle,
+    ),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   @override
@@ -141,60 +166,82 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           SizedBox(height: 20.0),
           Padding(
-              padding: EdgeInsets.only(left: 20.0),
-              child: Text('Best Food',
-                  style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.w600,
-                      fontSize: 17.0))),
+            padding: EdgeInsets.only(left: 20.0),
+            child: Text(
+              'Best Food',
+              style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  fontWeight: FontWeight.w600,
+                  fontSize: 17.0),
+            ),
+          ),
           SizedBox(height: 20.0),
           _buildFoodMenuList(),
         ],
       ),
-      bottomNavigationBar: Container(
-        height: 50.0,
-        decoration: BoxDecoration(
-          color: Color(0xFF5AC035),
-        ),
-        padding: EdgeInsets.only(left: 40.0, right: 40.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            IconButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  (MaterialPageRoute(builder: (context) => AboutUs())),
-                );
-              },
-              icon: Icon(
-                Icons.extension,
-                color: Colors.white,
-              ),
-            ),
-            IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.of(context).push(
-                    (MaterialPageRoute(builder: (context) => LocalFoods())),
-                  );
-                }),
-            IconButton(
-              icon: Icon(
-                Icons.person_outline,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Navigator.of(context).push(
-                  (MaterialPageRoute(builder: (context) => UserPage())),
-                );
-              },
-            ),
-          ],
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.business),
+            title: Text('All Foods'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            title: Text('User Info'),
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
       ),
+      // bottomNavigationBar: Container(
+      //   height: 50.0,
+      //   decoration: BoxDecoration(
+      //     color: Color(0xFF5AC035),
+      //   ),
+      //   padding: EdgeInsets.only(left: 40.0, right: 40.0),
+      //   child: Row(
+      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //     children: <Widget>[
+      //       IconButton(
+      //         onPressed: () {
+      //           Navigator.of(context).push(
+      //             (MaterialPageRoute(builder: (context) => AboutUs())),
+      //           );
+      //         },
+      //         icon: Icon(
+      //           Icons.extension,
+      //           color: Colors.white,
+      //         ),
+      //       ),
+      //       IconButton(
+      //           icon: Icon(
+      //             Icons.search,
+      //             color: Colors.white,
+      //           ),
+      //           onPressed: () {
+      //             Navigator.of(context).push(
+      //               (MaterialPageRoute(builder: (context) => FoodListing())),
+      //             );
+      //           }),
+      //       IconButton(
+      //         icon: Icon(
+      //           Icons.person_outline,
+      //           color: Colors.white,
+      //         ),
+      //         onPressed: () {
+      //           Navigator.of(context).push(
+      //             (MaterialPageRoute(builder: (context) => UserPage())),
+      //           );
+      //         },
+      //       ),
+      //     ],
+      //   ),
+      // ),
     );
   }
 
@@ -399,7 +446,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         heroTag: item.imagepath,
                         foodName: item.name,
                         foodPrice: item.price,
-                        foodDescription: item.decription,
+                        foodDescription: item.description,
                       )));
 
               setState(() {});
@@ -484,7 +531,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Food(
         name: 'Tyeng Gweno',
         price: '5000',
-        decription:
+        description:
             'Zinge that meal and rock Favourite Chicken Plaza Meant for youyour pallete.Favourite Chicken Plaza Meant for you',
         imagepath: 'assets/burger.png',
         quantity: 1,
@@ -492,7 +539,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Food(
         name: 'Molokony',
         price: '2000',
-        decription:
+        description:
             'Favourite Chicken Plaza.Favourite Chicken Plaza Meant for you Meant for you.Favourite Chicken Plaza Meant for you',
         imagepath: 'assets/images/plate6.png',
         quantity: 1,
@@ -500,7 +547,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Food(
         name: 'Zodongo Meal',
         price: '2000',
-        decription:
+        description:
             'Favourite Chicken Plaza.Favourite Chicken Plaza Meant for you Meant for you.Favourite Chicken Plaza Meant for you',
         imagepath: 'assets/images/plate3.png',
         quantity: 1,
@@ -508,7 +555,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Food(
         name: 'Patrick Special',
         price: '2000',
-        decription:
+        description:
             'Favourite Chicken Plaza.Favourite Chicken Plaza Meant for you Meant for you.Favourite Chicken Plaza Meant for you',
         imagepath: 'assets/images/plate2.png',
         quantity: 1,
@@ -516,7 +563,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Food(
         name: 'Sedrick Special',
         price: '2000',
-        decription:
+        description:
             'Favourite Chicken Plaza.Favourite Chicken Plaza Meant for you Meant for you.Favourite Chicken Plaza Meant for you',
         imagepath: 'assets/images/plate1.png',
         quantity: 1,
@@ -533,7 +580,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Food(
         name: 'Chicken Zinger',
         price: '5000',
-        decription:
+        description:
             'Zinge that meal and rock Favourite Chicken Plaza Meant for youyour pallete.Favourite Chicken Plaza Meant for you',
         imagepath: 'assets/plate1.png',
         quantity: 1,
@@ -541,7 +588,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Food(
         name: 'Chicken',
         price: '2000',
-        decription:
+        description:
             'Favourite Chicken Plaza.Favourite Chicken Plaza Meant for you Meant for you.Favourite Chicken Plaza Meant for you',
         imagepath: 'assets/plate2.png',
         quantity: 1,
@@ -549,7 +596,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Food(
         name: 'Rice',
         price: '5000',
-        decription:
+        description:
             'Favourite Chicken Plaza.Favourite Chicken Plaza Meant for you Meant for you.The assorted Rice content meant for you',
         imagepath: 'assets/plate3.png',
         quantity: 1,
@@ -557,7 +604,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Food(
         name: 'Beef',
         price: '5000',
-        decription:
+        description:
             'The Best Beef.Favourite Chicken.Favourite Chicken Plaza Meant for you Plaza Meant for you Burger in the Land',
         imagepath: 'assets/plate4.png',
         quantity: 1,
@@ -565,7 +612,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Food(
         name: 'Sausage ',
         price: '5000',
-        decription:
+        description:
             'checkout our.Favourite Chicken.Favourite Chicken Plaza Meant for you Plaza Meant for you sauage',
         imagepath: 'assets/saucesage.png',
         quantity: 1,
@@ -573,7 +620,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Food(
         name: 'Deck',
         price: '5000',
-        decription:
+        description:
             'Where .Favourite Chicken Plaza Meant for youall,Favourite Chicken Plaza Meant for you the local foods meet and dine',
         imagepath: 'assets/plate5.png',
         quantity: 1,
@@ -581,7 +628,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Food(
         name: 'Mac',
         price: '5000',
-        decription:
+        description:
             'Favourite.Favourite Chicken Plaza ,Favourite Chicken Plaza Meant for youMeant for you Mac Food meant for you',
         imagepath: 'assets/plate6.png',
         quantity: 1,
