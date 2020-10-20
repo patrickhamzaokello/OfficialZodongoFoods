@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutterloginui/CartFoodDetail.dart';
 import 'package:flutterloginui/popus/confirmation.dart';
 import 'package:flutterloginui/providers/products_provider.dart';
+import 'package:flutterloginui/shareds/loading.dart';
+import 'package:load/load.dart';
 import 'package:provider/provider.dart';
 import 'models/foodObject.dart';
 import 'dart:io';
@@ -39,201 +41,214 @@ class _CartState extends State<Cart> {
 
     final cartProvider = Provider.of<ProductProvider>(context);
 
-    return Scaffold(
-      backgroundColor: Color(0xFF5AC035),
-      body: ListView(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(top: 15.0, left: 10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.arrow_back_ios),
-                  color: Colors.white,
-                  onPressed: () {
-                    Navigator.of(context).pop(_cart);
-                  },
-                ),
-                Container(
-                    // width: 125.0,
-                    child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    // IconButton(
-                    //   icon: Icon(Icons.calendar_today),
-                    //   color: Colors.white,
-                    //   onPressed: () {},
-                    // ),
-                    IconButton(
-                      icon: Icon(Icons.menu),
-                      color: Colors.white,
-                      onPressed: () {},
-                    )
-                  ],
-                ))
-              ],
-            ),
-          ),
-          SizedBox(height: 25.0),
-          Padding(
-            padding: EdgeInsets.only(left: 40.0),
-            child: Row(
-              children: <Widget>[
-                Text('Your',
-                    style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25.0)),
-                SizedBox(width: 10.0),
-                Text('Order Cart',
-                    style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        color: Colors.white,
-                        fontSize: 25.0))
-              ],
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.only(top: 10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Total',
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    fontSize: 17.0,
+    return LoadingProvider(
+      child: Scaffold(
+        backgroundColor: Color(0xFF5AC035),
+        body: ListView(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(top: 15.0, left: 10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.arrow_back_ios),
                     color: Colors.white,
+                    onPressed: () {
+                      Navigator.of(context).pop(_cart);
+                    },
                   ),
-                ),
-                SizedBox(width: 10.0),
-                Text(
-                  bill.toString(),
-                  style: TextStyle(
+                  Container(
+                      // width: 125.0,
+                      child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      // IconButton(
+                      //   icon: Icon(Icons.calendar_today),
+                      //   color: Colors.white,
+                      //   onPressed: () {},
+                      // ),
+                      IconButton(
+                        icon: Icon(Icons.menu),
+                        color: Colors.white,
+                        onPressed: () {
+                          showLoadingDialog();
+                          // showCustomLoadingWidget(Container()); // custom dialog
+                          // hideLoadingDialog();
+                        },
+                      )
+                    ],
+                  ))
+                ],
+              ),
+            ),
+            SizedBox(height: 25.0),
+            Padding(
+              padding: EdgeInsets.only(left: 40.0),
+              child: Row(
+                children: <Widget>[
+                  Text('Your',
+                      style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25.0)),
+                  SizedBox(width: 10.0),
+                  Text('Order Cart',
+                      style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          color: Colors.white,
+                          fontSize: 25.0))
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(top: 10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Total',
+                    style: TextStyle(
                       fontFamily: 'Montserrat',
-                      fontSize: 18.0,
+                      fontSize: 17.0,
                       color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
-          ),
-          SizedBox(height: 40.0),
-          Container(
-            height: MediaQuery.of(context).size.height - 185.0,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(75.0)),
-            ),
-            child: ListView(
-              primary: false,
-              padding: EdgeInsets.only(left: 25.0, right: 20.0),
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(top: 10.0),
-                  child: Container(
-                    height: MediaQuery.of(context).size.height - 300.0,
-                    child: ListView(
-                      children: [
-                        _buildFoodItem(),
-                      ],
                     ),
                   ),
-                ),
-                SizedBox(height: 8.0),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: InkWell(
-                          onTap: () async {
-                            try {
-                              final result =
-                                  await InternetAddress.lookup('google.com');
-                              if (result.isNotEmpty &&
-                                  result[0].rawAddress.isNotEmpty) {
-                                // print('connected');
-                                // productProvider.saveProduct(_cart);
-                                cartProvider.saveCardOrders(_cart);
+                  SizedBox(width: 10.0),
+                  Text(
+                    bill.toString(),
+                    style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 18.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            ),
+            SizedBox(height: 40.0),
+            Container(
+              height: MediaQuery.of(context).size.height - 185.0,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(75.0)),
+              ),
+              child: ListView(
+                primary: false,
+                padding: EdgeInsets.only(left: 25.0, right: 20.0),
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(top: 10.0),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height - 300.0,
+                      child: ListView(
+                        children: [
+                          _buildFoodItem(),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 8.0),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: InkWell(
+                            onTap: () async {
+                              await showLoadingDialog();
+                              try {
+                                final result =
+                                    await InternetAddress.lookup('google.com');
+                                if (result.isNotEmpty &&
+                                    result[0].rawAddress.isNotEmpty) {
+                                  // print('connected');
+                                  // productProvider.saveProduct(_cart);
+                                  cartProvider.saveCardOrders(_cart);
+                                  hideLoadingDialog();
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        CustomDialog(
+                                      title: "Success!",
+                                      description:
+                                          "Your Order has been Received! We shall Contact You Right Away, Thank You",
+                                      buttonText: "Okay",
+                                    ),
+                                  );
+                                  _cart.clear();
+                                  // bill = 0;
+                                  Navigator.of(context).pop(_cart);
+                                  // setState(() {});
+                                }
+                              } on SocketException catch (_) {
+                                // print('not connected');
+                                hideLoadingDialog();
                                 showDialog(
                                   context: context,
                                   builder: (BuildContext context) =>
                                       CustomDialog(
-                                    title: "Success",
+                                    title: "Failed",
                                     description:
-                                        "Your Order has been Received! Thank You",
+                                        "Order Failed, No Internet Connection. Please Try again",
                                     buttonText: "Okay",
                                   ),
                                 );
-                                _cart.clear();
-                                // bill = 0;
-                                Navigator.of(context).pop(_cart);
-                                // setState(() {});
                               }
-                            } on SocketException catch (_) {
-                              // print('not connected');
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) => CustomDialog(
-                                  title: "Failed",
-                                  description:
-                                      "Order Failed, No Internet Connection. Please Try again",
-                                  buttonText: "Okay",
-                                ),
-                              );
-                            }
-                          },
-                          child: Container(
-                            height: 40.0,
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.pink[400]),
-                              color: Colors.pink[400],
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Submit Order",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                            },
+                            child: Container(
+                              height: 40.0,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.pink[400]),
+                                color: Colors.pink[400],
                               ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 10.0),
-                      Expanded(
-                        child: InkWell(
-                          onTap: () =>
-                              {_cart.clear(), Navigator.of(context).pop(_cart)},
-                          child: Container(
-                            height: 40.0,
-                            decoration: BoxDecoration(
-                              border: Border.all(),
-                            ),
-                            child: Center(
-                              child: Padding(
-                                padding: EdgeInsets.all(10.0),
+                              child: Center(
                                 child: Text(
-                                  "Clear Cart",
-                                  style: TextStyle(fontWeight: FontWeight.w600),
+                                  "Submit Order",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                        SizedBox(width: 10.0),
+                        Expanded(
+                          child: InkWell(
+                            onTap: () => {
+                              _cart.clear(),
+                              Navigator.of(context).pop(_cart)
+                            },
+                            child: Container(
+                              height: 40.0,
+                              decoration: BoxDecoration(
+                                border: Border.all(),
+                              ),
+                              child: Center(
+                                child: Padding(
+                                  padding: EdgeInsets.all(10.0),
+                                  child: Text(
+                                    "Clear Cart",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          )
-        ],
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

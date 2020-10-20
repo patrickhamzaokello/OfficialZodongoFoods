@@ -49,10 +49,13 @@ class CustomDialog extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min, // To make the card compact
             children: <Widget>[
+              Image.asset('assets/images/logo.png'),
+              SizedBox(height: 16.0),
               Text(
                 title,
                 style: TextStyle(
                   fontSize: 24.0,
+                  color: Color(0xFF5AC035),
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -79,14 +82,14 @@ class CustomDialog extends StatelessWidget {
         ),
         //...bottom card part,
         //...top circlular image part,
-        Positioned(
-          left: Consts.padding,
-          right: Consts.padding,
-          child: CircleAvatar(
-            backgroundColor: Color(0xFF5AC035),
-            radius: Consts.avatarRadius,
-          ),
-        ),
+        // Positioned(
+        //   left: Consts.padding,
+        //   right: Consts.padding,
+        //   child: CircleAvatar(
+        //     backgroundColor: Color(0xFF5AC035),
+        //     radius: Consts.avatarRadius,
+        //   ),
+        // ),
       ],
     );
   }

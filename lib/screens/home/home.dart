@@ -94,7 +94,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     context: context,
                     builder: (BuildContext context) => CustomDialog(
                       title: "Empty Cart",
-                      description: "Please Add Food to Cart First!",
+                      description:
+                          "Your Cart is Empty,Please Add Food to Cart First! Before you can Continue",
                       buttonText: "Okay",
                     ),
                   );
