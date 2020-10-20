@@ -44,7 +44,7 @@ class FirestoreService {
         snapshot.docs.map((doc) => Food.fromJson(doc.data())).toList());
   }
 
-  Future<void> removeFood(String foodid) {
-    return _db.collection('PKfoods').doc(foodid).delete();
-  }
+  // Future<void> removeFood(String foodid) {
+  //   return _db.collection('PKfoods').doc(foodid).delete();
+  // }
 }

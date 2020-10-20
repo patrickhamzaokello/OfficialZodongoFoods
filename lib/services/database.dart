@@ -6,14 +6,14 @@ class DatabaseService {
   DatabaseService({this.uid});
 
   //collection reference
-  final CollectionReference brewCollection =
-      FirebaseFirestore.instance.collection('brews');
+  final CollectionReference userCollection =
+      FirebaseFirestore.instance.collection('ZodongoUsers');
 
   final CollectionReference onlineFoodCollection =
       FirebaseFirestore.instance.collection('FoodListings');
 
   Future updateUserData(String name, String phone, String email) async {
-    return await brewCollection.doc(uid).set({
+    return await userCollection.doc(uid).set({
       'name': name,
       'phone': phone,
       'email': email,
@@ -21,13 +21,13 @@ class DatabaseService {
   }
 
   //Save Orders to Database
-  Future saveOrders(List<Food> food) async {
-    return await brewCollection
-        .doc(uid)
-        .collection("Orders")
-        .doc()
-        .set(food[0].toMap());
-  }
+  // Future saveOrders(List<Food> food) async {
+  //   return await userCollection
+  //       .doc(uid)
+  //       .collection("Orders")
+  //       .doc()
+  //       .set(food[0].toMap());
+  // }
 
   // Food list from snapshot
   List<Food> _foodListFromSnapshot(QuerySnapshot snapshot) {
