@@ -47,22 +47,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
-  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -72,6 +56,62 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> _widgetOptions = <Widget>[
+      ListView(
+        children: <Widget>[
+          SizedBox(height: 20.0),
+          SizedBox(height: 10.0),
+          Padding(
+            padding: EdgeInsets.only(left: 25.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text('You Stay At Home.',
+                    style: TextStyle(
+                        fontFamily: 'Futur',
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF5B8842),
+                        fontSize: 35.0)),
+                Text('We Deliver!',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF5B8842),
+                        fontSize: 35.0)),
+                SizedBox(height: 20.0),
+                Text('Popular Food',
+                    style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 17.0))
+              ],
+            ),
+          ),
+          SizedBox(height: 7.0),
+          Container(
+            height: 250.0,
+            child: _buildFavouriteFoods(),
+          ),
+          SizedBox(height: 20.0),
+          Padding(
+            padding: EdgeInsets.only(left: 20.0),
+            child: Text(
+              'Best Food',
+              style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  fontWeight: FontWeight.w600,
+                  fontSize: 17.0),
+            ),
+          ),
+          SizedBox(height: 20.0),
+          _buildFoodMenuList(),
+        ],
+      ),
+      // FoodListing(),
+      // LocalFoods(),
+
+      AboutUs(),
+      UserPage()
+    ];
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -130,118 +170,30 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-      body: ListView(
-        children: <Widget>[
-          SizedBox(height: 20.0),
-          SizedBox(height: 10.0),
-          Padding(
-            padding: EdgeInsets.only(left: 25.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text('You Stay At Home.',
-                    style: TextStyle(
-                        fontFamily: 'Futur',
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF5B8842),
-                        fontSize: 35.0)),
-                Text('We Deliver!',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF5B8842),
-                        fontSize: 35.0)),
-                SizedBox(height: 20.0),
-                Text('Popular Food',
-                    style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 17.0))
-              ],
-            ),
-          ),
-          SizedBox(height: 7.0),
-          Container(
-            height: 250.0,
-            child: _buildFavouriteFoods(),
-          ),
-          SizedBox(height: 20.0),
-          Padding(
-            padding: EdgeInsets.only(left: 20.0),
-            child: Text(
-              'Best Food',
-              style: TextStyle(
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 17.0),
-            ),
-          ),
-          SizedBox(height: 20.0),
-          _buildFoodMenuList(),
-        ],
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.green,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.restaurant),
             title: Text('Home'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            title: Text('All Foods'),
+            icon: Icon(Icons.extension),
+            title: Text('About Us'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            title: Text('User Info'),
+            icon: Icon(Icons.account_box),
+            title: Text('User Account'),
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.amber,
+        unselectedItemColor: Colors.white,
         onTap: _onItemTapped,
       ),
-      // bottomNavigationBar: Container(
-      //   height: 50.0,
-      //   decoration: BoxDecoration(
-      //     color: Color(0xFF5AC035),
-      //   ),
-      //   padding: EdgeInsets.only(left: 40.0, right: 40.0),
-      //   child: Row(
-      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //     children: <Widget>[
-      //       IconButton(
-      //         onPressed: () {
-      //           Navigator.of(context).push(
-      //             (MaterialPageRoute(builder: (context) => AboutUs())),
-      //           );
-      //         },
-      //         icon: Icon(
-      //           Icons.extension,
-      //           color: Colors.white,
-      //         ),
-      //       ),
-      //       IconButton(
-      //           icon: Icon(
-      //             Icons.search,
-      //             color: Colors.white,
-      //           ),
-      //           onPressed: () {
-      //             Navigator.of(context).push(
-      //               (MaterialPageRoute(builder: (context) => FoodListing())),
-      //             );
-      //           }),
-      //       IconButton(
-      //         icon: Icon(
-      //           Icons.person_outline,
-      //           color: Colors.white,
-      //         ),
-      //         onPressed: () {
-      //           Navigator.of(context).push(
-      //             (MaterialPageRoute(builder: (context) => UserPage())),
-      //           );
-      //         },
-      //       ),
-      //     ],
-      //   ),
-      // ),
     );
   }
 
@@ -386,10 +338,12 @@ class _MyHomePageState extends State<MyHomePage> {
                           item.pricechange = item.price;
                           item.qtnchange = item.quantity;
                           _cartList.add(item);
+                          print("pkkk $item");
                         } else {
                           item.pricechange = item.price;
                           item.qtnchange = item.quantity;
                           _cartList.remove(item);
+                          print("pkkk $item");
                         }
                       });
                     },

@@ -32,7 +32,7 @@ class _AboutUsState extends State<AboutUs> {
         height: 140.0,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/zodongologo.jpeg'),
+            image: AssetImage('assets/images/profileimage.jpg'),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.circular(80.0),
@@ -158,91 +158,31 @@ class _AboutUsState extends State<AboutUs> {
     );
   }
 
-  Widget _buildButtons() {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: InkWell(
-              onTap: () => print("followed"),
-              child: Container(
-                height: 40.0,
-                decoration: BoxDecoration(
-                  border: Border.all(),
-                  color: Color(0xFF404A5C),
-                ),
-                child: Center(
-                  child: Text(
-                    "FOLLOW",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(width: 10.0),
-          Expanded(
-            child: InkWell(
-              onTap: () => print("Message"),
-              child: Container(
-                height: 40.0,
-                decoration: BoxDecoration(
-                  border: Border.all(),
-                ),
-                child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      "MESSAGE",
-                      style: TextStyle(fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFF5AC035),
-        elevation: 0.0,
-        title: Text('About Us'),
-      ),
-      body: Stack(
-        children: <Widget>[
-          _buildCoverImage(screenSize),
-          SafeArea(
-            child: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  SizedBox(height: screenSize.height / 6.4),
-                  _buildProfileImage(),
-                  _buildFullName(),
-                  _buildStatus(context),
-                  _buildBio(context),
-                  _buildSeparator(screenSize),
-                  SizedBox(height: 10.0),
-                  _buildGetInTouch(context),
-                  _buildPhoneno(context),
-                  SizedBox(height: 8.0),
-                  _buildButtons(),
-                ],
-              ),
+    return Stack(
+      children: <Widget>[
+        // _buildCoverImage(screenSize),
+        SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                // SizedBox(height: screenSize.height / 6.4),
+                _buildProfileImage(),
+                _buildFullName(),
+                _buildStatus(context),
+                _buildBio(context),
+                _buildSeparator(screenSize),
+                SizedBox(height: 10.0),
+                _buildGetInTouch(context),
+                _buildPhoneno(context),
+                SizedBox(height: 8.0),
+              ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

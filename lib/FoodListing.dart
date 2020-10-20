@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterloginui/FoodListingCart.dart';
 import 'package:flutterloginui/FoodListingDetails.dart';
-import 'package:flutterloginui/popus/confirmation.dart';
 import 'package:flutterloginui/providers/products_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -15,91 +13,31 @@ class FoodListing extends StatefulWidget {
   _FoodListingState createState() => _FoodListingState();
 }
 
-class _FoodListingState extends State<FoodListing> {
-  List<Food> _cartList = List<Food>();
+List<Food> _cartList = List<Food>();
 
+class _FoodListingState extends State<FoodListing> {
   @override
   Widget build(BuildContext context) {
     final foodProvider = Provider.of<ProductProvider>(context);
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Food Menu List"),
-        actions: <Widget>[
+    return StreamBuilder<List<Food>>(
+      stream: foodProvider.foods,
+      builder: (context, snapshot) {
+        return ListView(children: <Widget>[
+          SizedBox(height: 20.0),
           Padding(
-            padding: const EdgeInsets.only(right: 16.0, top: 8.0),
-            child: GestureDetector(
-              child: Stack(
-                alignment: Alignment.topCenter,
-                children: <Widget>[
-                  Icon(
-                    Icons.shopping_cart,
-                    size: 36.0,
-                  ),
-                  if (_cartList.length > 0)
-                    Padding(
-                      padding: const EdgeInsets.only(left: 2.0),
-                      child: CircleAvatar(
-                        radius: 8.0,
-                        backgroundColor: Colors.red,
-                        foregroundColor: Colors.white,
-                        child: Text(
-                          _cartList.length.toString(),
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                ],
-              ),
-              onTap: () async {
-                if (_cartList.isNotEmpty) {
-                  final result = await Navigator.of(context).push(
-                      MaterialPageRoute(
-                          builder: (context) => FoodListingCart(_cartList)));
-
-                  setState(() {
-                    _cartList = result;
-
-                    // print("quantity: ${item.quantity}");
-                  });
-                } else {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) => CustomDialog(
-                      title: "Empty Cart",
-                      description:
-                          "Your Cart is Empty,Please Add Food to Cart First! Before you can Continue",
-                      buttonText: "Okay",
-                    ),
-                  );
-                }
-              },
+            padding: EdgeInsets.only(left: 20.0),
+            child: Text(
+              'All Foods We Serve',
+              style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  fontWeight: FontWeight.w600,
+                  fontSize: 17.0),
             ),
-          )
-        ],
-      ),
-      body: StreamBuilder<List<Food>>(
-        stream: foodProvider.foods,
-        builder: (context, snapshot) {
-          return ListView(children: <Widget>[
-            SizedBox(height: 20.0),
-            Padding(
-              padding: EdgeInsets.only(left: 20.0),
-              child: Text(
-                'All Foods We Serve',
-                style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w600,
-                    fontSize: 17.0),
-              ),
-            ),
-            SizedBox(height: 20.0),
-            _buildFoodMenuList(snapshot)
-          ]);
-        },
-      ),
+          ),
+          SizedBox(height: 20.0),
+          _buildFoodMenuList(snapshot)
+        ]);
+      },
     );
   }
 
@@ -164,10 +102,12 @@ class _FoodListingState extends State<FoodListing> {
                         item.pricechange = item.price;
                         item.qtnchange = item.quantity;
                         _cartList.add(item);
+                        print("pkkk $item");
                       } else {
                         item.pricechange = item.price;
                         item.qtnchange = item.quantity;
                         _cartList.remove(item);
+                        print("pkkk $item");
                       }
                     });
                   },
@@ -203,15 +143,3 @@ class _FoodListingState extends State<FoodListing> {
     );
   }
 }
-
-// ListView.builder(
-//             itemCount: snapshot.data.length,
-//             itemBuilder: (context, index) {
-//               return ListTile(
-//                 trailing: Icon(
-//                   Icons.edit,
-//                 ),
-//                 title: Text(snapshot.data[index].name),
-//               );
-//             },
-//           );

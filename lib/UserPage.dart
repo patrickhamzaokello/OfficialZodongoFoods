@@ -166,36 +166,29 @@ class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFF5AC035),
-        elevation: 0.0,
-        title: Text('Exit Zodongo Foods'),
-      ),
-      body: Stack(
-        children: <Widget>[
-          _buildCoverImage(screenSize),
-          SafeArea(
-            child: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  SizedBox(height: screenSize.height / 6.4),
-                  _buildProfileImage(),
-                  _buildFullName(),
-                  _buildStatus(context),
-                  // _buildBio(context),
-                  _buildSeparator(screenSize),
-                  SizedBox(height: 10.0),
-                  _buildGetInTouch(context),
-                  _buildPhoneno(context),
-                  SizedBox(height: 8.0),
-                  _buildButtons(),
-                ],
-              ),
+    return Stack(
+      children: <Widget>[
+        _buildCoverImage(screenSize),
+        SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: screenSize.height / 6.4),
+                _buildProfileImage(),
+                _buildFullName(),
+                _buildStatus(context),
+                // _buildBio(context),
+                _buildSeparator(screenSize),
+                SizedBox(height: 10.0),
+                _buildGetInTouch(context),
+                _buildPhoneno(context),
+                SizedBox(height: 8.0),
+                _buildButtons(),
+              ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
