@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterloginui/AboutUs.dart';
-import 'package:flutterloginui/Search.dart';
+import 'package:flutterloginui/LocalFoods.dart';
 import 'package:flutterloginui/UserPage.dart';
 import 'package:flutterloginui/detailPage.dart';
 import 'package:flutterloginui/models/foodObject.dart';
@@ -178,7 +178,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 onPressed: () {
                   Navigator.of(context).push(
-                    (MaterialPageRoute(builder: (context) => SearchFood())),
+                    (MaterialPageRoute(builder: (context) => LocalFoods())),
                   );
                 }),
             IconButton(

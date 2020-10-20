@@ -124,47 +124,6 @@ class _DetailsPageState extends State<DetailsPage> {
                             color: Colors.black,
                             fontSize: 17.0),
                       ),
-                      // Container(
-                      //   width: 125.0,
-                      //   height: 40.0,
-                      //   decoration: BoxDecoration(
-                      //       borderRadius: BorderRadius.circular(25.0),
-                      //       color: Color(0xFFEDFEE5)),
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //     children: <Widget>[
-                      //       IconButton(
-                      //         icon: Icon(Icons.remove_circle_outline,
-                      //             color: Color(0xFF5CB238)),
-                      //         onPressed: () {
-                      //           setState(() {
-                      //             if (foodqtn == 1) {
-                      //               foodqtn = 1;
-                      //             } else {
-                      //               foodqtn = foodqtn - 1;
-                      //             }
-                      //           });
-                      //         },
-                      //       ),
-                      //       Text(
-                      //         foodqtn.toString(),
-                      //         style: TextStyle(
-                      //             fontFamily: 'Montserrat',
-                      //             fontSize: 20.0,
-                      //             color: Color(0xFF5CB238)),
-                      //       ),
-                      //       IconButton(
-                      //         icon: Icon(Icons.add_circle,
-                      //             color: Color(0xFF5AC035)),
-                      //         onPressed: () {
-                      //           setState(() {
-                      //             foodqtn = foodqtn + 1;
-                      //           });
-                      //         },
-                      //       )
-                      //     ],
-                      //   ),
-                      // )
                     ]),
                 SizedBox(height: 15.0),
                 Text('About the food',

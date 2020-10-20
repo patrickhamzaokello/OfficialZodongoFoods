@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutterloginui/models/brew.dart';
 import 'package:flutterloginui/models/foodObject.dart';
 
 class DatabaseService {
@@ -9,6 +8,9 @@ class DatabaseService {
   //collection reference
   final CollectionReference brewCollection =
       FirebaseFirestore.instance.collection('brews');
+
+  final CollectionReference onlineFoodCollection =
+      FirebaseFirestore.instance.collection('FoodListings');
 
   Future updateUserData(String name, String phone, String email) async {
     return await brewCollection.doc(uid).set({
@@ -27,19 +29,22 @@ class DatabaseService {
         .set(food[0].toMap());
   }
 
-  // brew list from snapshot
-  List<Brew> _brewListFromSnapshot(QuerySnapshot snapshot) {
+  // Food list from snapshot
+  List<Food> _foodListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
-      return Brew(
+      return Food(
+        foodid: doc.data()['foodid'] ?? '',
         name: doc.data()['name'] ?? '',
-        phonenumber: doc.data()['phone'] ?? '',
-        email: doc.data()['email'],
+        price: doc.data()['price'] ?? '',
+        decription: doc.data()['description'] ?? '',
+        imagepath: doc.data()['imagepath'] ?? '',
+        quantity: doc.data()['quantity'] ?? '',
       );
     }).toList();
   }
 
-  //get brews stream
-  Stream<List<Brew>> get userinfo {
-    return brewCollection.snapshots().map(_brewListFromSnapshot);
+  //get Foods stream
+  Stream<List<Food>> get foodlisting {
+    return onlineFoodCollection.snapshots().map(_foodListFromSnapshot);
   }
 }
